@@ -10,6 +10,7 @@ module.exports = {
   },
   devtool: "cheap-eval-source-map",
   devServer: {
+    port: "1111",
     contentBase: "./dist"
   },
   plugins: [
