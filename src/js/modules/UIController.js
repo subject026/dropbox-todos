@@ -1,11 +1,15 @@
+import { Dropbox } from "dropbox";
+
 export const DOM = {
   header: "#header",
   buttonAuthenticate: "#button-authenticate"
 };
 
-export function renderAuthenticateButton() {
+export function renderAuthenticateLink() {
+  const dbx = new Dropbox({ clientId: "e45k6j9mvumew4x" });
+  var authUrl = dbx.getAuthenticationUrl("http://localhost:1111");
   const el = `
-  <button type="button" id="button-authenticate">Authenticate</button>
+  <a href="${authUrl}">Authenticate</a>
   `;
   document.querySelector(DOM.header).insertAdjacentHTML("beforeend", el);
 }
