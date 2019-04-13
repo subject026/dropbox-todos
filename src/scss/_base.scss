@@ -18,3 +18,17 @@ body {
 .app-title {
   margin: 0;
 }
+
+.list {
+  width: 400px;
+  padding: 20px;
+  background-color: white;
+}
+
+.list__title {
+  margin: 0;
+}
+
+.list__list {
+  min-height: 300px;
+}

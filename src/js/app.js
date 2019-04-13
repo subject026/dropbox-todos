@@ -2,8 +2,8 @@ import "../scss/index.scss";
 
 import { getTokenLocal, setTokenLocal } from "./modules/LocalStorageController";
 import { DBGetFilesList, DBGetData, DBSaveData } from "./modules/DropboxController";
-import { DOM, renderAuthenticateLink, loading } from "./modules/UIController";
-import { initState, getState, getTodos, addTodo } from "./modules/TodosController";
+import { DOM, renderAuthenticateLink, loading, render } from "./modules/UIController";
+import { initState, stateLoadData, getState, getTodos, addTodo } from "./modules/TodosController";
 
 /* Init
 
@@ -19,7 +19,7 @@ import { initState, getState, getTodos, addTodo } from "./modules/TodosControlle
 
 */
 
-const init = async () => {
+async function init() {
   loading.render();
   const urlToken = window.location.hash;
   if (urlToken) {
@@ -44,16 +44,22 @@ const init = async () => {
       const path = filesList[index].path_lower;
       // get the data
       const data = await DBGetData(path);
-      // update our app state
-      //
+      // load into app state
+      console.log("dataaaaaa: ", data);
+      stateLoadData(data);
       // render todos based on app state
-      //
+      loading.remove();
+      render(getState());
+      // bind click handler
+      bindEvents();
     } else {
       // no json file - save a fresh one based on initial app state
       initState();
       DBSaveData(getState());
       // render todos based on state
-      //
+      loading.remove();
+      render(getState());
+      bindEvents();
     }
     // 2. if json data:
     // - update state based on data
@@ -65,6 +71,15 @@ const init = async () => {
     // render authenticate link
     renderAuthenticateLink();
   }
-};
+}
+
+function handleAddTodo(event) {
+  event.preventDefault();
+  console.log(event);
+}
+
+function bindEvents() {
+  document.querySelector(DOM.listForm).addEventListener("submit", handleAddTodo);
+}
 
 init();
