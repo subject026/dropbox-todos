@@ -31,4 +31,21 @@ body {
 
 .list__list {
   min-height: 300px;
+  list-style-type: none;
+  padding: 0;
+  border: 3px solid darkorchid;
+}
+
+.list__item {
+  background-color: plum;
+  margin: 5px;
+  padding: 5px;
+  position: relative;
+  button {
+    position: absolute;
+    right: 5px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
