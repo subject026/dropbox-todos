@@ -10,7 +10,6 @@ export async function DBGetFilesList() {
   let res;
   try {
     res = await dbx.filesListFolder({ path: "" });
-    console.log(res);
     return res.entries;
   } catch (err) {
     console.log(err);

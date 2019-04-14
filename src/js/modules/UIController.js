@@ -47,7 +47,11 @@ function listMarkup(state) {
 }
 
 function todoMarkup(todo) {
-  return `<li>${todo.todo}</li>`;
+  return `<li class="list__item" data-id="${todo.id}">
+            <input type="checkbox" ${todo.isComplete ? "checked" : ""}>
+            ${todo.todo}
+            <button type="button">delete</button>
+          </li>`;
 }
 
 function todosMarkup(state) {

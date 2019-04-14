@@ -45,7 +45,6 @@ async function init() {
       // get the data
       const data = await DBGetData(path);
       // load into app state
-      console.log("dataaaaaa: ", data);
       stateLoadData(data);
       // render todos based on app state
       loading.remove();
@@ -77,7 +76,7 @@ function handleAddTodo(event) {
   event.preventDefault();
   const todoText = document.addTodoForm.todoText.value;
   addTodo(todoText);
-  console.log(getState());
+  DBSaveData(getState());
 }
 
 function bindEvents() {
