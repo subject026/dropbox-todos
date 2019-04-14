@@ -75,7 +75,9 @@ async function init() {
 
 function handleAddTodo(event) {
   event.preventDefault();
-  console.log(event);
+  const todoText = document.addTodoForm.todoText.value;
+  addTodo(todoText);
+  console.log(getState());
 }
 
 function bindEvents() {

@@ -37,8 +37,8 @@ function listMarkup(state) {
       <ul class="list__list">
         ${todosMarkup(state)}
       </ul>
-      <form class="list__form">
-        <input type="text" />
+      <form name="addTodoForm" class="list__form">
+        <input name="todoText" type="text" />
         <button type="submit">Add todo</button>
       </form>
     </section>
@@ -46,10 +46,14 @@ function listMarkup(state) {
   return markup;
 }
 
+function todoMarkup(todo) {
+  return `<li>${todo.todo}</li>`;
+}
+
 function todosMarkup(state) {
-  let markup = ``;
+  let markup = "";
   state.todos.forEach(todo => {
-    markup += `<li>${todo}</li>`;
+    markup += todoMarkup(todo);
   });
   return markup;
 }

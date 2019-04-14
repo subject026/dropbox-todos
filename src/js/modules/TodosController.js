@@ -1,15 +1,14 @@
+import { generateId } from "./util";
+
+const state = {};
+
 class Todo {
   constructor(todo, isComplete = false) {
     this.todo = todo;
     this.isComplete = isComplete;
+    this.id = generateId();
   }
 }
-
-/**
- * App state
- */
-
-const state = {};
 
 export function initState() {
   state.lastUpdated = Date.now();
