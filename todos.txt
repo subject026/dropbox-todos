@@ -1,0 +1,5 @@
+DOM - insert new todo
+
+DOM - remove todo
+
+STATE - toggle isComplete
