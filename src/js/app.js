@@ -55,6 +55,7 @@ function handleAddTodo(event) {
   if (!todoText.length) return; // empty input
   const newTodo = StateController.addTodo(todoText);
   UIController.addTodo(newTodo);
+  document.addTodoForm.todoText.value = "";
   DBSaveData(StateController.getState());
 }
 
@@ -66,6 +67,8 @@ function handleListClick(event) {
       StateController.removeTodo(listEl.dataset.id);
       // remove from DOM
       UIController.removeTodo(listEl.dataset.id);
+      // update DB data
+      DBSaveData(StateController.getState());
       break;
     default:
     // do nothing
