@@ -23,7 +23,15 @@ export function stateLoadData(data) {
 }
 
 export function addTodo(todo, isComplete) {
-  state.todos.push(new Todo(todo, isComplete));
+  const newTodo = new Todo(todo, isComplete);
+  state.todos.push(newTodo);
+  return newTodo;
+}
+
+export function removeTodo(id) {
+  // find index of todo
+  const index = state.todos.findIndex(todo => todo.id === id);
+  state.todos = [...state.todos.slice(0, index), ...state.todos.slice(index + 1)];
 }
 
 export function getTodos() {

@@ -3,22 +3,12 @@ import "../scss/index.scss";
 import { getTokenLocal, setTokenLocal } from "./modules/LocalStorageController";
 import { DBGetFilesList, DBGetData, DBSaveData } from "./modules/DropboxController";
 import { DOM, renderAuthenticateLink, loading, render } from "./modules/UIController";
-import { initState, stateLoadData, getState, getTodos, addTodo } from "./modules/TodosController";
+import * as StateController from "./modules/TodosController";
+import * as UIController from "./modules/UIController";
 
-/* Init
-
-  - check whether app is authenticated
-  - if it is 
-    - check DB for json data
-    - if data
-      - update app state
-      - render todos from app state
-    - if no data
-      - initialise json data in DB as empty
-      - update app state 
-
-*/
-
+/**
+ * initialise app on page load
+ */
 async function init() {
   loading.render();
   const urlToken = window.location.hash;
@@ -45,27 +35,15 @@ async function init() {
       // get the data
       const data = await DBGetData(path);
       // load into app state
-      stateLoadData(data);
-      // render todos based on app state
-      loading.remove();
-      render(getState());
-      // bind click handler
-      bindEvents();
+      StateController.stateLoadData(data);
     } else {
-      // no json file - save a fresh one based on initial app state
-      initState();
-      DBSaveData(getState());
-      // render todos based on state
-      loading.remove();
-      render(getState());
-      bindEvents();
+      StateController.initState();
+      DBSaveData(StateController.getState());
     }
-    // 2. if json data:
-    // - update state based on data
-    // 3. if no json data:
-    // - initialise json file in DB
-    // - initialise state
-    // render todos from state
+    loading.remove();
+    render(StateController.getState());
+    console.log(StateController.getState().todos);
+    bindEvents();
   } else {
     // render authenticate link
     renderAuthenticateLink();
@@ -75,12 +53,29 @@ async function init() {
 function handleAddTodo(event) {
   event.preventDefault();
   const todoText = document.addTodoForm.todoText.value;
-  addTodo(todoText);
-  DBSaveData(getState());
+  if (!todoText.length) return; // empty input
+  const newTodo = StateController.addTodo(todoText);
+  UIController.addTodo(newTodo);
+  DBSaveData(StateController.getState());
+}
+
+function handleListClick(event) {
+  switch (event.target.dataset.type) {
+    case "delete-button":
+      const listEl = event.target.closest(DOM.listItem);
+      // remove from state
+      StateController.removeTodo(listEl.dataset.id);
+      // remove from DOM
+      UIController.removeTodo(listEl.dataset.id);
+      break;
+    default:
+    // do nothing
+  }
 }
 
 function bindEvents() {
   document.querySelector(DOM.listForm).addEventListener("submit", handleAddTodo);
+  document.querySelector(DOM.list).addEventListener("click", handleListClick);
 }
 
 init();

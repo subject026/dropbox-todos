@@ -5,10 +5,13 @@ export const DOM = {
   buttonAuthenticate: "#button-authenticate",
   main: ".main",
   loadingTodos: ".loading-todos",
+  list: ".list__list",
+  listItem: ".list__item",
   listForm: ".list__form"
 };
 
 const mainEl = document.querySelector(DOM.main);
+let listEl;
 
 export function renderAuthenticateLink() {
   const dbx = new Dropbox({ clientId: "e45k6j9mvumew4x" });
@@ -31,7 +34,7 @@ export const loading = {
 };
 
 function listMarkup(state) {
-  const markup = `
+  return `
     <section class="list">
       <h3 class="list__title">${state.title}</h3>
       <ul class="list__list">
@@ -41,17 +44,16 @@ function listMarkup(state) {
         <input name="todoText" type="text" />
         <button type="submit">Add todo</button>
       </form>
-    </section>
-  `;
-  return markup;
+    </section>`;
 }
 
 function todoMarkup(todo) {
-  return `<li class="list__item" data-id="${todo.id}">
-            <input type="checkbox" ${todo.isComplete ? "checked" : ""}>
-            ${todo.todo}
-            <button type="button">delete</button>
-          </li>`;
+  return `
+  <li class="list__item" data-id="${todo.id}">
+    <input type="checkbox" data-type="checkbox"${todo.isComplete ? "checked" : ""}>
+    ${todo.todo}
+    <button type="button" data-type="delete-button">delete</button>
+  </li>`;
 }
 
 function todosMarkup(state) {
@@ -64,4 +66,13 @@ function todosMarkup(state) {
 
 export function render(state) {
   mainEl.innerHTML = listMarkup(state);
+  listEl = document.querySelector(DOM.list);
+}
+
+export function addTodo(todo) {
+  listEl.insertAdjacentHTML("beforeend", todoMarkup(todo));
+}
+
+export function removeTodo(id) {
+  console.log(id);
 }
