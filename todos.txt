@@ -1,6 +1,2 @@
-STATE - remove todo
-DOM - remove todo
-
-
 
 STATE - toggle isComplete
