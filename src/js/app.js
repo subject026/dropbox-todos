@@ -60,14 +60,17 @@ function handleAddTodo(event) {
 }
 
 function handleListClick(event) {
+  let listEl;
   switch (event.target.dataset.type) {
     case "delete-button":
-      const listEl = event.target.closest(DOM.listItem);
-      // remove from state
+      listEl = event.target.closest(DOM.listItem);
       StateController.removeTodo(listEl.dataset.id);
-      // remove from DOM
       UIController.removeTodo(listEl.dataset.id);
-      // update DB data
+      DBSaveData(StateController.getState());
+      break;
+    case "checkbox":
+      listEl = event.target.closest(DOM.listItem);
+      StateController.toggleTodo(listEl.dataset.id);
       DBSaveData(StateController.getState());
       break;
     default:

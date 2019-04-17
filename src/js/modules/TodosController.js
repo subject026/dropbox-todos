@@ -34,6 +34,11 @@ export function removeTodo(id) {
   state.todos = [...state.todos.slice(0, index), ...state.todos.slice(index + 1)];
 }
 
+export function toggleTodo(id) {
+  const index = state.todos.findIndex(todo => todo.id === id);
+  state.todos[index].isComplete = !state.todos[index].isComplete;
+}
+
 export function getTodos() {
   return [...state.todos];
 }
