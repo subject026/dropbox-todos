@@ -1,4 +1,5 @@
 import { generateId } from "./util";
+import * as DBController from "./DropboxController";
 
 const state = {};
 
@@ -14,6 +15,7 @@ export function initState() {
   state.lastUpdated = Date.now();
   state.title = "New todo list";
   state.todos = [];
+  DBController.saveData(state);
 }
 
 export function stateLoadData(data) {
@@ -25,6 +27,7 @@ export function stateLoadData(data) {
 export function addTodo(todo, isComplete) {
   const newTodo = new Todo(todo, isComplete);
   state.todos.push(newTodo);
+  DBController.saveData(state);
   return newTodo;
 }
 
@@ -32,15 +35,13 @@ export function removeTodo(id) {
   // find index of todo
   const index = state.todos.findIndex(todo => todo.id === id);
   state.todos = [...state.todos.slice(0, index), ...state.todos.slice(index + 1)];
+  DBController.saveData(state);
 }
 
 export function toggleTodo(id) {
   const index = state.todos.findIndex(todo => todo.id === id);
   state.todos[index].isComplete = !state.todos[index].isComplete;
-}
-
-export function getTodos() {
-  return [...state.todos];
+  DBController.saveData(state);
 }
 
 export function getState() {

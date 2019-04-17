@@ -5,7 +5,7 @@ import { getTokenLocal } from "./LocalStorageController";
 /**
  * Returns array of remote app folder file details
  */
-export async function DBGetFilesList() {
+export async function getFilesList() {
   const dbx = new Dropbox({ accessToken: getTokenLocal(), fetch });
   let res;
   try {
@@ -19,7 +19,7 @@ export async function DBGetFilesList() {
 /**
  * Returns parsed JSON file from remote DB app folder
  */
-export async function DBGetData(path) {
+export async function getData(path) {
   const dbx = new Dropbox({ accessToken: getTokenLocal(), fetch });
   let data;
   try {
@@ -42,7 +42,7 @@ export async function DBGetData(path) {
 /**
  * Save todos data as JSON file to DB app folder
  */
-export async function DBSaveData(data) {
+export async function saveData(data) {
   const dbx = new Dropbox({ accessToken: getTokenLocal(), fetch });
   const blob = new Blob([JSON.stringify(data)], {
     type: "application/json"

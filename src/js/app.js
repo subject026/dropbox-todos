@@ -1,8 +1,8 @@
 import "../scss/index.scss";
 
 import { getTokenLocal, setTokenLocal } from "./modules/LocalStorageController";
-import { DBGetFilesList, DBGetData, DBSaveData } from "./modules/DropboxController";
 import { DOM, renderAuthenticateLink, loading, render } from "./modules/UIController";
+import * as DBController from "./modules/DropboxController";
 import * as StateController from "./modules/TodosController";
 import * as UIController from "./modules/UIController";
 
@@ -11,7 +11,7 @@ import * as UIController from "./modules/UIController";
  */
 async function init() {
   loading.render();
-  const urlToken = window.location.hash;
+  const urlToken = window.location.hash; // if there's a hash a verification link has been followed
   if (urlToken) {
     const token = urlToken.split("access_token=")[1].split("&")[0];
     setTokenLocal(token);
@@ -20,7 +20,7 @@ async function init() {
   const accessToken = getTokenLocal();
   if (accessToken) {
     // 1. Check DB for json data
-    const filesList = await DBGetFilesList();
+    const filesList = await DBController.getFilesList();
     if (filesList.length) {
       // there is a list of files - get the most recent one
       const sortedTimestamps = filesList
@@ -33,12 +33,11 @@ async function init() {
       const index = sortedTimestamps[0][1];
       const path = filesList[index].path_lower;
       // get the data
-      const data = await DBGetData(path);
+      const data = await DBController.getData(path);
       // load into app state
       StateController.stateLoadData(data);
     } else {
       StateController.initState();
-      DBSaveData(StateController.getState());
     }
     loading.remove();
     render(StateController.getState());
@@ -56,7 +55,6 @@ function handleAddTodo(event) {
   const newTodo = StateController.addTodo(todoText);
   UIController.addTodo(newTodo);
   document.addTodoForm.todoText.value = "";
-  DBSaveData(StateController.getState());
 }
 
 function handleListClick(event) {
@@ -66,12 +64,10 @@ function handleListClick(event) {
       listEl = event.target.closest(DOM.listItem);
       StateController.removeTodo(listEl.dataset.id);
       UIController.removeTodo(listEl.dataset.id);
-      DBSaveData(StateController.getState());
       break;
     case "checkbox":
       listEl = event.target.closest(DOM.listItem);
       StateController.toggleTodo(listEl.dataset.id);
-      DBSaveData(StateController.getState());
       break;
     default:
     // do nothing
