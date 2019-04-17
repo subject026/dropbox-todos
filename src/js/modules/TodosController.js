@@ -12,7 +12,6 @@ class Todo {
 }
 
 export function initState() {
-  state.lastUpdated = Date.now();
   state.title = "New todo list";
   state.todos = [];
   DBController.saveData(state);
@@ -20,7 +19,6 @@ export function initState() {
 
 export function stateLoadData(data) {
   state.title = data.title;
-  state.lastUpdated = data.lastUpdated;
   state.todos = [...data.todos];
 }
 
