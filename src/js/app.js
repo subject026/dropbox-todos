@@ -42,7 +42,6 @@ async function init() {
     }
     loading.remove();
     render(StateController.getState());
-    console.log(StateController.getState().todos);
     bindEvents();
   } else {
     // render authenticate link

@@ -74,5 +74,6 @@ export function addTodo(todo) {
 }
 
 export function removeTodo(id) {
-  console.log(id);
+  const listEl = document.querySelector(`[data-id=${id}]`);
+  listEl.parentElement.removeChild(listEl);
 }
