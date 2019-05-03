@@ -1,2 +1,5 @@
+- Add timer / debounce to DB save
 
-STATE - toggle isComplete
+- make list title editable
+
+- Make todo text editable
