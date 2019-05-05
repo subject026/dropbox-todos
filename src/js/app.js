@@ -74,9 +74,20 @@ function handleListClick(event) {
   }
 }
 
+function handleListFocus(event) {
+  // !!! Stop return from moving to new line
+  document.addEventListener("keyup", event => {
+    StateController.updateTitle(event.target.textContent);
+  });
+}
+
 function bindEvents() {
-  document.querySelector(DOM.listForm).addEventListener("submit", handleAddTodo);
-  document.querySelector(DOM.list).addEventListener("click", handleListClick);
+  const list = document.querySelector(DOM.list);
+  const listForm = document.querySelector(DOM.listForm);
+
+  listForm.addEventListener("submit", handleAddTodo);
+  list.addEventListener("click", handleListClick);
+  list.addEventListener("focusin", handleListFocus);
 }
 
 init();

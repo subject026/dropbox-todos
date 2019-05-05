@@ -22,6 +22,11 @@ export function stateLoadData(data) {
   state.todos = [...data.todos];
 }
 
+export function updateTitle(data) {
+  state.title = data;
+  DBController.saveData(state);
+}
+
 export function addTodo(todo, isComplete) {
   const newTodo = new Todo(todo, isComplete);
   state.todos.push(newTodo);
