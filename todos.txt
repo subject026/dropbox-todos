@@ -3,3 +3,12 @@
 - make list title editable
 
 - Make todo text editable
+
+
+// refactoring...
+
+  - make module imports/exports consistent
+
+  - seperate initialisation functionality, window.onload = xxx
+
+  - seperate events controller
