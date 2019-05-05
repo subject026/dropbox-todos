@@ -5,7 +5,9 @@ export const DOM = {
   buttonAuthenticate: "#button-authenticate",
   main: ".main",
   loadingTodos: ".loading-todos",
-  list: ".list__list",
+  list: ".list",
+  listTitle: ".list__title",
+  todos: ".list__todos",
   listItem: ".list__item",
   listForm: ".list__form"
 };
@@ -36,8 +38,8 @@ export const loading = {
 function listMarkup(state) {
   return `
     <section class="list">
-      <h3 class="list__title">${state.title}</h3>
-      <ul class="list__list">
+      <h3 class="list__title" contenteditable=true>${state.title}</h3>
+      <ul class="list__todos">
         ${todosMarkup(state)}
       </ul>
       <form name="addTodoForm" class="list__form">
@@ -66,7 +68,7 @@ function todosMarkup(state) {
 
 export function render(state) {
   mainEl.innerHTML = listMarkup(state);
-  listEl = document.querySelector(DOM.list);
+  listEl = document.querySelector(DOM.todos);
 }
 
 export function addTodo(todo) {
