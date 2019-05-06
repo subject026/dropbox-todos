@@ -54,7 +54,6 @@ function todoMarkup(todo) {
   <li class="list__item" data-id="${todo.id}">
     <input type="checkbox" data-type="checkbox"${todo.isComplete ? "checked" : ""}>
     <div class="list__item__details" contenteditable="true">${todo.todo}</div>
-    <button type="button" data-type="delete-button">🗑️</button>
   </li>`;
 }
 

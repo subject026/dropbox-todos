@@ -19,6 +19,20 @@ body {
   margin: 0;
 }
 
+.note-bin {
+  height: 150px;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: firebrick;
+}
+
+.note-bin--hovered {
+  color: whitesmoke;
+  background-color: firebrick;
+}
+
 .list {
   width: 400px;
   padding: 20px;
