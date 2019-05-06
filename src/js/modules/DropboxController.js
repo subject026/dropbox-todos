@@ -2,6 +2,8 @@ import { Dropbox } from "dropbox";
 
 import { getTokenLocal } from "./LocalStorageController";
 
+let saveTimeout;
+
 /**
  * Returns array of remote app folder file details
  */
@@ -43,6 +45,13 @@ export async function getData(path) {
  * Save todos data as JSON file to DB app folder
  */
 export async function saveData(data) {
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(function() {
+    postData(data);
+  }, 3000);
+}
+
+function postData(data) {
   const dbx = new Dropbox({ accessToken: getTokenLocal(), fetch });
   const blob = new Blob([JSON.stringify(data)], {
     type: "application/json"
