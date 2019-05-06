@@ -3,7 +3,7 @@ import "../scss/index.scss";
 import { getTokenLocal, setTokenLocal } from "./modules/LocalStorageController";
 import { DOM, renderAuthenticateLink, loading, render } from "./modules/UIController";
 import * as DBController from "./modules/DropboxController";
-import * as StateController from "./modules/TodosController";
+import * as StateController from "./modules/StateController";
 import * as UIController from "./modules/UIController";
 
 /**
@@ -89,11 +89,18 @@ function handleDragEnter(event) {
   event.target.classList.toggle("note-bin--hovered");
 }
 
+// need to handle dragover to allow drop
+function handleDragOver(event) {
+  event.preventDefault();
+}
+
 function handleDragLeave(event) {
+  event.preventDefault();
   event.target.classList.toggle("note-bin--hovered");
 }
 
 function handleDrop(event) {
+  event.preventDefault();
   const id = event.dataTransfer.getData("text");
   StateController.removeTodo(id);
   UIController.removeTodo(id);
@@ -114,9 +121,7 @@ function bindEvents() {
   list.addEventListener("dragstart", handleDragStart);
   noteBin.addEventListener("dragenter", handleDragEnter);
   noteBin.addEventListener("dragleave", handleDragLeave);
-  noteBin.addEventListener("dragover", function(event) {
-    event.preventDefault();
-  });
+  noteBin.addEventListener("dragover", handleDragOver);
   noteBin.addEventListener("drop", handleDrop);
 }
 

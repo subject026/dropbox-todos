@@ -5,11 +5,13 @@ body {
 }
 
 .header {
-  height: 50px;
+  height: 60px;
+  display: grid;
+  grid-template-columns: 9fr 1fr;
 }
 
 .main {
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +22,8 @@ body {
 }
 
 .note-bin {
-  height: 150px;
+  height: 60px;
+  line-height: 1.5;
   font-size: 40px;
   display: flex;
   align-items: center;
@@ -58,22 +61,7 @@ body {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 8fr 1fr;
-  button {
-    width: 20px;
-    height: 20px;
-    padding: 0px 3px 3px 3px;
-    border: none;
-    position: absolute;
-    right: 0;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-}
-
-.list__item__details {
-  &:focus {
-    border: none !important;
-    background: lemonchiffon;
+  &:hover {
+    cursor: pointer;
   }
 }

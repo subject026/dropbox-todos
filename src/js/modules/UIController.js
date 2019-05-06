@@ -54,7 +54,7 @@ function todoMarkup(todo) {
   return `
   <li class="list__item" data-id="${todo.id}" draggable="true">
     <input type="checkbox" data-type="checkbox"${todo.isComplete ? "checked" : ""}>
-    <div class="list__item__details" contenteditable="true">${todo.todo}</div>
+    <div class="list__item__details">${todo.todo}</div>
   </li>`;
 }
 
