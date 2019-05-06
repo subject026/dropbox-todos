@@ -1,14 +1,19 @@
-- Add timer / debounce to DB save
+////////////////////////////////////////////////////////////////////////
+// Features 
 
-- make list title editable
+  - Make todo text save to state/DB when edited
 
-- Make todo text editable
+  - have list items delete when dragged over bin
 
 
-// refactoring...
+
+////////////////////////////////////////////////////////////////////////
+// Refactorings
 
   - make module imports/exports consistent
 
   - seperate initialisation functionality, window.onload = xxx
 
   - seperate events controller
+
+  - singleton for dbx instance?
