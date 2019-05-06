@@ -3,6 +3,7 @@ import { Dropbox } from "dropbox";
 export const DOM = {
   header: ".header",
   buttonAuthenticate: "#button-authenticate",
+  noteBin: ".note-bin",
   main: ".main",
   loadingTodos: ".loading-todos",
   list: ".list",
@@ -51,7 +52,7 @@ function listMarkup(state) {
 
 function todoMarkup(todo) {
   return `
-  <li class="list__item" data-id="${todo.id}">
+  <li class="list__item" data-id="${todo.id}" draggable="true">
     <input type="checkbox" data-type="checkbox"${todo.isComplete ? "checked" : ""}>
     <div class="list__item__details" contenteditable="true">${todo.todo}</div>
   </li>`;

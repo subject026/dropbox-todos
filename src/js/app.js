@@ -78,14 +78,46 @@ function handleTitleChange(event) {
   StateController.updateTitle(event.target.textContent);
 }
 
+//
+//  Drag & Drop Handlers
+//
+function handleDragStart(event) {
+  event.dataTransfer.setData("text", event.target.dataset.id);
+}
+
+function handleDragEnter(event) {
+  event.target.classList.toggle("note-bin--hovered");
+}
+
+function handleDragLeave(event) {
+  event.target.classList.toggle("note-bin--hovered");
+}
+
+function handleDrop(event) {
+  const id = event.dataTransfer.getData("text");
+  StateController.removeTodo(id);
+  UIController.removeTodo(id);
+  event.target.classList.toggle("note-bin--hovered");
+}
+
 function bindEvents() {
   const list = document.querySelector(DOM.list);
   const listForm = document.querySelector(DOM.listForm);
   const listTitle = document.querySelector(DOM.listTitle);
+  const noteBin = document.querySelector(DOM.noteBin);
 
   listTitle.addEventListener("input", handleTitleChange);
   listForm.addEventListener("submit", handleAddTodo);
   list.addEventListener("click", handleListClick);
+
+  // Drag & Drop
+  list.addEventListener("dragstart", handleDragStart);
+  noteBin.addEventListener("dragenter", handleDragEnter);
+  noteBin.addEventListener("dragleave", handleDragLeave);
+  noteBin.addEventListener("dragover", function(event) {
+    event.preventDefault();
+  });
+  noteBin.addEventListener("drop", handleDrop);
 }
 
 init();
