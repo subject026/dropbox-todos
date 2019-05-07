@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////
 // Features 
 
-  - Switch from content editable to an editmode for title and todo text
+  - prevent return key default behavior while in edit mode
 
   - figma design
 

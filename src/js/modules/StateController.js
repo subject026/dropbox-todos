@@ -47,7 +47,6 @@ export function toggleTodo(id) {
 }
 
 export function removeTodo(id) {
-  // find index of todo
   const index = state.todos.findIndex(todo => todo.id === id);
   state.todos = [...state.todos.slice(0, index), ...state.todos.slice(index + 1)];
   DBController.saveData(state);

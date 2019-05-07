@@ -45,7 +45,7 @@ export async function getData(path) {
  * Save todos data as JSON file to DB app folder
  */
 export async function saveData(data) {
-  console.log("saveDate timeout started");
+  // console.log("saveDate timeout started");
   clearTimeout(saveTimeout);
   saveTimeout = setTimeout(function() {
     postData(data);
@@ -53,7 +53,7 @@ export async function saveData(data) {
 }
 
 function postData(data) {
-  console.log("posting date to DB");
+  // console.log("posting date to DB");
   const dbx = new Dropbox({ accessToken: getTokenLocal(), fetch });
   const blob = new Blob([JSON.stringify(data)], {
     type: "application/json"
@@ -64,7 +64,7 @@ function postData(data) {
       path: `/${Date.now()}_todos.json`,
       contents: blob
     });
-    console.log("data saved to DB!");
+    // console.log("data saved to DB!");
     return res;
   } catch (err) {
     return err;

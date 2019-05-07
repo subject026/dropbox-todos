@@ -11,6 +11,5 @@ export function generateId() {
     const num = generateNumber();
     id += alphabet[num];
   }
-  console.log(id);
   return id;
 }

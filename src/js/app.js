@@ -135,7 +135,6 @@ function handleDrop(event) {
 function bindEvents() {
   const list = document.querySelector(DOM.list);
   const listForm = document.querySelector(DOM.listForm);
-  const listTitle = document.querySelector(DOM.listTitle);
   const noteBin = document.querySelector(DOM.noteBin);
 
   listForm.addEventListener("submit", handleAddTodo);
