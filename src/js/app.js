@@ -82,6 +82,8 @@ function handleListDoubleClick(event) {
 }
 
 function handleBlur(event) {
+  const trimmed = event.target.textContent.trim();
+  event.target.textContent = trimmed;
   UIController.makeUnEditable(event.target);
 }
 

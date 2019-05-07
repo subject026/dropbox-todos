@@ -35,10 +35,8 @@ export function addTodo(todo, isComplete) {
 }
 
 export function editTodoText(id, newText) {
-  console.log(state.todos);
-  console.log(id);
   const index = state.todos.findIndex(todo => todo.id === id);
-  state.todos[index].todo = newText;
+  state.todos[index].todo = newText.trim();
   DBController.saveData(state);
 }
 
