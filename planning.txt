@@ -1,9 +1,10 @@
 ////////////////////////////////////////////////////////////////////////
 // Features 
 
-  - Make todo text save to state/DB when edited
+  - Switch from content editable to an editmode for title and todo text
 
-  - have list items delete when dragged over bin
+  - figma design
+
 
 
 
