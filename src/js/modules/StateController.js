@@ -34,16 +34,24 @@ export function addTodo(todo, isComplete) {
   return newTodo;
 }
 
-export function removeTodo(id) {
-  // find index of todo
+export function editTodoText(id, newText) {
+  console.log(state.todos);
+  console.log(id);
   const index = state.todos.findIndex(todo => todo.id === id);
-  state.todos = [...state.todos.slice(0, index), ...state.todos.slice(index + 1)];
+  state.todos[index].todo = newText;
   DBController.saveData(state);
 }
 
 export function toggleTodo(id) {
   const index = state.todos.findIndex(todo => todo.id === id);
   state.todos[index].isComplete = !state.todos[index].isComplete;
+  DBController.saveData(state);
+}
+
+export function removeTodo(id) {
+  // find index of todo
+  const index = state.todos.findIndex(todo => todo.id === id);
+  state.todos = [...state.todos.slice(0, index), ...state.todos.slice(index + 1)];
   DBController.saveData(state);
 }
 

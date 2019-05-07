@@ -79,25 +79,26 @@ function handleListClick(event) {
 //
 function handleListDoubleClick(event) {
   UIController.makeEditable(event.target);
-
-  // switch (event.target.dataset.type) {
-  //   case "list-title":
-  //     console.log(event.target.textContent);
-  //     break;
-  //   case "item-details":
-  //     UIController.makeEditable(event.target);
-  //     break;
-  //   default:
-  //   // nothing
-  // }
 }
 
 function handleBlur(event) {
   UIController.makeUnEditable(event.target);
 }
 
-function handleTitleChange(event) {
-  StateController.updateTitle(event.target.textContent);
+function handleTextInput(event) {
+  const el = event.target;
+  switch (el.dataset.type) {
+    case "list-title":
+      StateController.updateTitle(event.target.textContent);
+      break;
+    case "item-details":
+      const id = event.target.closest(DOM.listItem).dataset.id;
+      const newText = el.textContent;
+      StateController.editTodoText(id, newText);
+      break;
+    default:
+    // do nothing
+  }
 }
 
 //
@@ -135,10 +136,10 @@ function bindEvents() {
   const listTitle = document.querySelector(DOM.listTitle);
   const noteBin = document.querySelector(DOM.noteBin);
 
-  listTitle.addEventListener("input", handleTitleChange);
   listForm.addEventListener("submit", handleAddTodo);
   list.addEventListener("click", handleListClick);
   list.addEventListener("dblclick", handleListDoubleClick);
+  list.addEventListener("input", handleTextInput);
   list.addEventListener("focusout", handleBlur);
 
   // Drag & Drop

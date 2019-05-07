@@ -45,6 +45,9 @@ body {
 
 .list__title {
   margin: 0;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .list__todos {
