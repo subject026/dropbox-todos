@@ -74,6 +74,28 @@ function handleListClick(event) {
   }
 }
 
+//
+//  Editing Items / Title
+//
+function handleListDoubleClick(event) {
+  UIController.makeEditable(event.target);
+
+  // switch (event.target.dataset.type) {
+  //   case "list-title":
+  //     console.log(event.target.textContent);
+  //     break;
+  //   case "item-details":
+  //     UIController.makeEditable(event.target);
+  //     break;
+  //   default:
+  //   // nothing
+  // }
+}
+
+function handleBlur(event) {
+  UIController.makeUnEditable(event.target);
+}
+
 function handleTitleChange(event) {
   StateController.updateTitle(event.target.textContent);
 }
@@ -116,6 +138,8 @@ function bindEvents() {
   listTitle.addEventListener("input", handleTitleChange);
   listForm.addEventListener("submit", handleAddTodo);
   list.addEventListener("click", handleListClick);
+  list.addEventListener("dblclick", handleListDoubleClick);
+  list.addEventListener("focusout", handleBlur);
 
   // Drag & Drop
   list.addEventListener("dragstart", handleDragStart);
@@ -125,4 +149,4 @@ function bindEvents() {
   noteBin.addEventListener("drop", handleDrop);
 }
 
-init();
+window.onload = init;

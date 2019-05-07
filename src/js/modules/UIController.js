@@ -39,7 +39,7 @@ export const loading = {
 function listMarkup(state) {
   return `
     <section class="list">
-      <h3 class="list__title" contenteditable=true>${state.title}</h3>
+      <h3 class="list__title" data-type="list-title">${state.title}</h3>
       <ul class="list__todos">
         ${todosMarkup(state)}
       </ul>
@@ -54,8 +54,14 @@ function todoMarkup(todo) {
   return `
   <li class="list__item" data-id="${todo.id}" draggable="true">
     <input type="checkbox" data-type="checkbox"${todo.isComplete ? "checked" : ""}>
-    <div class="list__item__details">${todo.todo}</div>
+    <div class="list__item__details" data-type="item-details">${todo.todo}</div>
   </li>`;
+}
+
+function textAreaMarkup(data) {
+  return `
+    <textarea>${data}</textarea>
+  `;
 }
 
 function todosMarkup(state) {
@@ -78,4 +84,19 @@ export function addTodo(todo) {
 export function removeTodo(id) {
   const listEl = document.querySelector(`[data-id="${id}"]`);
   listEl.parentElement.removeChild(listEl);
+}
+
+//
+// edit mode
+//
+
+export function makeEditable(node) {
+  node.contentEditable = true;
+  node.classList.toggle("list__item__details--edit");
+  node.focus();
+}
+
+export function makeUnEditable(node) {
+  node.contentEditable = false;
+  node.classList.toggle("list__item__details--edit");
 }

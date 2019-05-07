@@ -65,3 +65,10 @@ body {
     cursor: pointer;
   }
 }
+
+.list__item__details--edit {
+  background-color: azure;
+  &:hover {
+    cursor: text;
+  }
+}
