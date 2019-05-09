@@ -10,7 +10,7 @@ module.exports = envIsProd => {
     });
   } else {
     appUrl = new webpack.DefinePlugin({
-      APP_URL: JSON.stringify("localhost:1111")
+      APP_URL: JSON.stringify("http://localhost:1111")
     });
   }
   return {
