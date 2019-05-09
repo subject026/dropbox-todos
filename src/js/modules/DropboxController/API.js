@@ -6,7 +6,7 @@ let saveTimeout;
 
 export function getAuthenticationLink() {
   const dbx = new Dropbox({ clientId: "e45k6j9mvumew4x" });
-  const authUrl = dbx.getAuthenticationUrl("http://localhost:1111");
+  const authUrl = dbx.getAuthenticationUrl(APP_URL);
   return authUrl;
 }
 
