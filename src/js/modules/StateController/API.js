@@ -1,5 +1,6 @@
-import { generateId } from "./util";
-import * as DBController from "./DropboxController";
+import generateID from "./generateID";
+
+import * as DBController from "../DropboxController";
 
 const state = {};
 
@@ -7,19 +8,23 @@ class Todo {
   constructor(todo, isComplete = false) {
     this.todo = todo;
     this.isComplete = isComplete;
-    this.id = generateId();
+    this.id = generateID();
   }
 }
 
-export function initState() {
-  state.title = "New todo list";
-  state.todos = [];
-  DBController.saveData(state);
-}
-
-export function stateLoadData(data) {
+function populate(data) {
   state.title = data.title;
   state.todos = [...data.todos];
+}
+
+export function init(data) {
+  if (data) {
+    populate(data);
+  } else {
+    state.title = "New todo list";
+    state.todos = [];
+    DBController.saveData(state);
+  }
 }
 
 export function updateTitle(data) {

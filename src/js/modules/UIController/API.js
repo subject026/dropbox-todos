@@ -1,4 +1,5 @@
-import { Dropbox } from "dropbox";
+import * as DropboxController from "../DropboxController";
+import * as Markup from "./Markup";
 
 export const DOM = {
   header: ".header",
@@ -17,11 +18,8 @@ const mainEl = document.querySelector(DOM.main);
 let listEl;
 
 export function renderAuthenticateLink() {
-  const dbx = new Dropbox({ clientId: "e45k6j9mvumew4x" });
-  var authUrl = dbx.getAuthenticationUrl("http://localhost:1111");
-  const el = `
-  <a href="${authUrl}">Authenticate</a>
-  `;
+  const url = DropboxController.getAuthenticationLink();
+  const el = Markup.authLink(url);
   document.querySelector(DOM.header).insertAdjacentHTML("beforeend", el);
 }
 
@@ -36,49 +34,13 @@ export const loading = {
   }
 };
 
-function listMarkup(state) {
-  return `
-    <section class="list">
-      <h3 class="list__title" data-type="list-title">${state.title}</h3>
-      <ul class="list__todos">
-        ${todosMarkup(state)}
-      </ul>
-      <form name="addTodoForm" class="list__form">
-        <input name="todoText" type="text" />
-        <button type="submit">Add todo</button>
-      </form>
-    </section>`;
-}
-
-function todoMarkup(todo) {
-  return `
-  <li class="list__item" data-id="${todo.id}" draggable="true">
-    <input type="checkbox" data-type="checkbox"${todo.isComplete ? "checked" : ""}>
-    <div class="list__item__details" data-type="item-details">${todo.todo}</div>
-  </li>`;
-}
-
-function textAreaMarkup(data) {
-  return `
-    <textarea>${data}</textarea>
-  `;
-}
-
-function todosMarkup(state) {
-  let markup = "";
-  state.todos.forEach(todo => {
-    markup += todoMarkup(todo);
-  });
-  return markup;
-}
-
-export function render(state) {
-  mainEl.innerHTML = listMarkup(state);
+export function renderList(state) {
+  mainEl.innerHTML = Markup.list(state);
   listEl = document.querySelector(DOM.todos);
 }
 
 export function addTodo(todo) {
-  listEl.insertAdjacentHTML("beforeend", todoMarkup(todo));
+  listEl.insertAdjacentHTML("beforeend", Markup.todo(todo));
 }
 
 export function removeTodo(id) {

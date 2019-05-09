@@ -5,7 +5,7 @@ function generateNumber() {
   return Math.floor(Math.random() * alphabet.length);
 }
 
-export function generateId() {
+export default function generateID() {
   let id = "";
   for (let i = 0; i < idLength; i++) {
     const num = generateNumber();

@@ -1,8 +1,14 @@
 import { Dropbox } from "dropbox";
 
-import { getTokenLocal } from "./LocalStorageController";
+import { getTokenLocal } from "../LocalStorageController";
 
 let saveTimeout;
+
+export function getAuthenticationLink() {
+  const dbx = new Dropbox({ clientId: "e45k6j9mvumew4x" });
+  const authUrl = dbx.getAuthenticationUrl("http://localhost:1111");
+  return authUrl;
+}
 
 /**
  * Returns array of remote app folder file details
