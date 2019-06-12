@@ -4,8 +4,7 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = envIsProd => {
-  let appUrl;
-  let devtool;
+  let appUrl, devtool;
   if (envIsProd) {
     appUrl = new webpack.DefinePlugin({
       APP_URL: JSON.stringify("https://cranky-goldberg-d11d75.netlify.com")
