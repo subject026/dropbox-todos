@@ -36,6 +36,7 @@ export default async function init() {
     }
     UIController.loading.remove();
     UIController.renderList(StateController.getState());
+    console.log(StateController.getState());
     EventsController.bindEvents();
   } else {
     UIController.loading.remove();

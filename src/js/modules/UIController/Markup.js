@@ -8,7 +8,7 @@ function todos(state) {
 
 export function authLink(url) {
   return `
-  <a href="${url}">Authenticate</a>
+  <a href="${url}">Connect to Dropbox</a>
   `;
 }
 
@@ -30,6 +30,6 @@ export function todo(todo) {
   return `
   <li class="list__item" data-id="${todo.id}" draggable="true">
     <input type="checkbox" data-type="checkbox"${todo.isComplete ? "checked" : ""}>
-    <div class="list__item__details" data-type="item-details">${todo.todo}</div>
+    <div class="list__item__details" data-type="todo-text">${todo.todo}</div>
   </li>`;
 }
