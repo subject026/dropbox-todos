@@ -17,18 +17,21 @@ export default async function init() {
     // 1. Check DB for json data
     const filesList = await DBController.getFilesList();
     if (filesList.length) {
-      // there is a list of files - get the most recent one
-      const sortedTimestamps = filesList
-        .map((entry, i) => [entry.name.split("_")[0], i])
-        .sort((a, b) => {
-          if (a[0] > b[0]) return -1;
-          return 0;
-        });
-      // first item now has index of newest data file in list
-      const index = sortedTimestamps[0][1];
-      const path = filesList[index].path_lower;
+      // there is a list of files - get the path_lower val of most recent one
+      const newestFile = filesList.reduce(
+        (acc, item) => {
+          const timestamp = parseInt(item.name.split("_")[0]);
+          if (timestamp > acc.timestamp) {
+            acc.timestamp = timestamp.toString();
+            acc.path_lower = item.path_lower;
+          }
+          return acc;
+        },
+        { timestamp: 0, path_lower: "" }
+      );
+      const { path_lower } = newestFile;
       // get the data
-      const data = await DBController.getData(path);
+      const data = await DBController.getData(path_lower);
       // load into app state
       StateController.init(data);
     } else {
@@ -36,7 +39,6 @@ export default async function init() {
     }
     UIController.loading.remove();
     UIController.renderList(StateController.getState());
-    console.log(StateController.getState());
     EventsController.bindEvents();
   } else {
     UIController.loading.remove();
