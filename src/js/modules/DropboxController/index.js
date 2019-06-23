@@ -38,6 +38,7 @@ export async function getData(path) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onloadend = () => {
+      console.log(JSON.parse(reader.result));
       resolve(JSON.parse(reader.result));
     };
     reader.onerror = () => {
@@ -57,19 +58,19 @@ export async function saveData(data) {
   }, 3000);
 }
 
-function postData(data) {
+async function postData(data) {
   const dbx = DBX.getInstance();
   const blob = new Blob([JSON.stringify(data)], {
     type: "application/json"
   });
   let res;
   try {
-    res = dbx.filerequestsUpdate({
+    res = await dbx.filesUpload({
       path: `/${Date.now()}_todos.json`,
       contents: blob
     });
-    return res;
+    console.log("posting data response: ", res);
   } catch (err) {
-    return err;
+    console.error(err);
   }
 }
