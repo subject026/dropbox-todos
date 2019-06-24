@@ -7,7 +7,7 @@ module.exports = envIsProd => {
   let appUrl, devtool;
   if (envIsProd) {
     appUrl = new webpack.DefinePlugin({
-      APP_URL: JSON.stringify("https://cranky-goldberg-d11d75.netlify.com")
+      APP_URL: JSON.stringify("https://subject026.github.io/dropbox-todo/")
     });
     devtool = false;
   } else {
