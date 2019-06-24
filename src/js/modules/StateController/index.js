@@ -14,16 +14,17 @@ export function update(action, data, state) {
   const newState = JSON.parse(JSON.stringify(state));
   switch (action) {
     case "HYDRATE":
-      const { title, todos } = data;
-      newState.title = title;
-      newState.todos = todos;
+      newState.title = data.title;
+      newState.todos = data.todos;
+      return newState;
+    case "LIST_TITLE":
+      newState.title = data.title;
       return newState;
     case "ADD":
       newState.todos.push(data);
       return newState;
     case "TOGGLE":
-      const { id } = data;
-      const index = newState.todos.findIndex(todo => todo.id === id);
+      const index = newState.todos.findIndex(todo => todo.id === data.id);
       newState.todos[index].isComplete = !newState.todos[index].isComplete;
       return newState;
     default:
@@ -62,8 +63,8 @@ export function addTodo(title) {
   return newTodo;
 }
 
-export function updateTitle(data) {
-  state.title = data;
+export function updateTitle(title) {
+  state = update("LIST_TITLE", { title }, state);
   DBController.saveData(state);
 }
 

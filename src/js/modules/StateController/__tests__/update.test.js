@@ -22,6 +22,12 @@ describe("State Update Function", () => {
     expect(hydratedState).toEqual(testData);
   });
 
+  it("LIST_TITLE action should update the list's title", () => {
+    const data = { title: "I'm the new title" };
+    const newState = update("LIST_TITLE", data, initialState);
+    expect(newState.title).toEqual(data.title);
+  });
+
   it("ADD action should add new todo items to state", () => {
     let newState = JSON.parse(JSON.stringify(initialState));
     testData.todos.forEach(todo => {
@@ -48,6 +54,4 @@ describe("State Update Function", () => {
   });
 
   xit("TODO_TITLE action should update a todo's title", () => {});
-
-  xit("LIST_TITLE action should update the list's title", () => {});
 });
