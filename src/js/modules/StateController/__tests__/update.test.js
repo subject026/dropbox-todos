@@ -1,4 +1,5 @@
 import { initialState, update } from "../index";
+import { getTodoIndex } from "../Util";
 
 const testData = {
   title: "This is todo list",
@@ -66,7 +67,17 @@ describe("State Update Function", () => {
     expect(stateNewTitles.todos[2].title).toEqual(data3.title);
   });
 
-  xit("DELETE action should remove a todo from state", () => {
-    // !!!
+  it("DELETE action should remove a todo from state", () => {
+    let stateWithTodos = JSON.parse(JSON.stringify(initialState));
+    testData.todos.forEach(todo => {
+      stateWithTodos = update("ADD", todo, stateWithTodos);
+    });
+    const data1 = { id: 1 };
+    const data3 = { id: 3 };
+    let stateTodosDeleted = update("DELETE", data1, stateWithTodos);
+    stateTodosDeleted = update("DELETE", data3, stateTodosDeleted);
+    expect(stateTodosDeleted.todos).toHaveLength(2);
+    expect(getTodoIndex(stateTodosDeleted.todos, data1.id)).toBe(false);
+    expect(getTodoIndex(stateTodosDeleted.todos, data3.id)).toBe(false);
   });
 });

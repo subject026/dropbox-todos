@@ -32,6 +32,10 @@ export function update(action, data, state) {
       index = getTodoIndex(newState.todos, data.id);
       newState.todos[index].title = data.title;
       return newState;
+    case "DELETE":
+      index = getTodoIndex(newState.todos, data.id);
+      newState.todos = [...newState.todos.slice(0, index), ...newState.todos.slice(index + 1)];
+      return newState;
     default:
       return newState;
   }
@@ -84,8 +88,7 @@ export function toggleTodo(id) {
 }
 
 export function removeTodo(id) {
-  const index = state.todos.findIndex(todo => todo.id === id);
-  state.todos = [...state.todos.slice(0, index), ...state.todos.slice(index + 1)];
+  state = update("DELETE", { id }, state);
   DBController.saveData(state);
 }
 
