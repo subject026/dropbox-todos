@@ -26,10 +26,10 @@ export function list(state) {
     </section>`;
 }
 
-export function todo(todo) {
+export function todo({ id, title, isComplete }) {
   return `
-  <li class="list__item" data-id="${todo.id}" draggable="true">
-    <input type="checkbox" data-type="checkbox"${todo.isComplete ? "checked" : ""}>
-    <div class="list__item__details" data-type="todo-text">${todo.todo}</div>
+  <li class="list__item" data-id="${id}" draggable="true">
+    <input type="checkbox" data-type="checkbox"${isComplete ? "checked" : ""}>
+    <div class="list__item__details" data-type="todo-text">${title}</div>
   </li>`;
 }

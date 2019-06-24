@@ -38,14 +38,6 @@ export const initialState = {
   todos: []
 };
 
-class Todo {
-  constructor(todo, isComplete = false) {
-    this.todo = todo;
-    this.isComplete = isComplete;
-    this.id = generateID();
-  }
-}
-
 /**
  * API
  */
@@ -59,16 +51,20 @@ export function init(data) {
   }
 }
 
+export function addTodo(title) {
+  const newTodo = {
+    id: generateID(),
+    title,
+    isComplete: false
+  };
+  state = update("ADD", newTodo, state);
+  DBController.saveData(state);
+  return newTodo;
+}
+
 export function updateTitle(data) {
   state.title = data;
   DBController.saveData(state);
-}
-
-export function addTodo(todo, isComplete) {
-  const newTodo = new Todo(todo, isComplete);
-  state.todos.push(newTodo);
-  DBController.saveData(state);
-  return newTodo;
 }
 
 export function editTodoText(id, newText) {
@@ -88,14 +84,6 @@ export function removeTodo(id) {
   state.todos = [...state.todos.slice(0, index), ...state.todos.slice(index + 1)];
   DBController.saveData(state);
 }
-
-// export function addMode(value) {
-//   state.addMode = value;
-// }
-
-// export function isAddMode() {
-//   return ({ addMode } = state);
-// }
 
 export function getState() {
   return { ...state };
