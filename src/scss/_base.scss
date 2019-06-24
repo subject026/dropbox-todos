@@ -28,13 +28,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: firebrick;
-  background-color: seagreen;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 10;
+  svg {
+    z-index: 5;
+  }
 }
 
 .note-bin--hovered {
-  color: whitesmoke;
-  background-color: firebrick;
+  svg {
+    transform: scale(1.5);
+  }
 }
 
 .list {
