@@ -16,5 +16,5 @@ export function generateID() {
 
 export function getTodoIndex(arr, id) {
   const index = arr.findIndex(item => item.id === id);
-  return index;
+  return index < 0 ? false : index;
 }
