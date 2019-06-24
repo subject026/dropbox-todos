@@ -20,7 +20,7 @@ export async function getFilesList() {
     res = await dbx.filesListFolder({ path: "" });
     return res.entries;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 }
 
@@ -33,12 +33,11 @@ export async function getData(path) {
   try {
     data = await dbx.filesDownload({ path });
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onloadend = () => {
-      console.log(JSON.parse(reader.result));
       resolve(JSON.parse(reader.result));
     };
     reader.onerror = () => {
@@ -69,7 +68,6 @@ async function postData(data) {
       path: `/${Date.now()}_todos.json`,
       contents: blob
     });
-    console.log("posting data response: ", res);
   } catch (err) {
     console.error(err);
   }
