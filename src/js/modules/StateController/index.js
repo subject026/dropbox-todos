@@ -13,6 +13,11 @@ import * as DBController from "../DropboxController";
 export function update(action, data, state) {
   const newState = JSON.parse(JSON.stringify(state));
   switch (action) {
+    case "HYDRATE":
+      const { title, todos } = data;
+      newState.title = title;
+      newState.todos = todos;
+      return newState;
     case "ADD":
       newState.todos.push(data);
       return newState;
@@ -26,12 +31,12 @@ export function update(action, data, state) {
   }
 }
 
+let state = {};
+
 export const initialState = {
   title: "New todo List",
   todos: []
 };
-
-let state;
 
 class Todo {
   constructor(todo, isComplete = false) {
@@ -41,20 +46,15 @@ class Todo {
   }
 }
 
-function populate(data) {
-  state.title = data.title;
-  state.todos = [...data.todos];
-}
-
 /**
  * API
  */
 
 export function init(data) {
-  state = initialState;
   if (data) {
-    populate(data);
+    state = update("HYDRATE", data, state);
   } else {
+    state = initialState;
     DBController.saveData(state);
   }
 }
