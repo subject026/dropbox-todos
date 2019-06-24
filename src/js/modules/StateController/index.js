@@ -1,4 +1,4 @@
-import generateID from "./generateID";
+import { generateID, getTodoIndex } from "./Util";
 
 import * as DBController from "../DropboxController";
 
@@ -12,6 +12,7 @@ import * as DBController from "../DropboxController";
 
 export function update(action, data, state) {
   const newState = JSON.parse(JSON.stringify(state));
+  let index;
   switch (action) {
     case "HYDRATE":
       newState.title = data.title;
@@ -24,8 +25,12 @@ export function update(action, data, state) {
       newState.todos.push(data);
       return newState;
     case "TOGGLE":
-      const index = newState.todos.findIndex(todo => todo.id === data.id);
+      index = getTodoIndex(newState.todos, data.id);
       newState.todos[index].isComplete = !newState.todos[index].isComplete;
+      return newState;
+    case "TODO_TITLE":
+      index = getTodoIndex(newState.todos, data.id);
+      newState.todos[index].title = data.title;
       return newState;
     default:
       return newState;
@@ -68,15 +73,13 @@ export function updateTitle(title) {
   DBController.saveData(state);
 }
 
-export function editTodoText(id, newText) {
-  const index = state.todos.findIndex(todo => todo.id === id);
-  state.todos[index].todo = newText.trim();
+export function editTodoText(id, title) {
+  state = update("TODO_TITLE", { id, title }, state);
   DBController.saveData(state);
 }
 
 export function toggleTodo(id) {
-  const index = state.todos.findIndex(todo => todo.id === id);
-  state.todos[index].isComplete = !state.todos[index].isComplete;
+  state = update("TOGGLE", { id }, state);
   DBController.saveData(state);
 }
 
@@ -87,5 +90,5 @@ export function removeTodo(id) {
 }
 
 export function getState() {
-  return { ...state };
+  return JSON.parse(JSON.stringify(state));
 }

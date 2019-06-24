@@ -53,5 +53,20 @@ describe("State Update Function", () => {
     expect(toggledState.todos[2].isComplete).toBe(false);
   });
 
-  xit("TODO_TITLE action should update a todo's title", () => {});
+  it("TODO_TITLE action should update a todo's title", () => {
+    let stateWithTodos = JSON.parse(JSON.stringify(initialState));
+    testData.todos.forEach(todo => {
+      stateWithTodos = update("ADD", todo, stateWithTodos);
+    });
+    const data2 = { id: "2", title: "New todo 2 title" };
+    const data3 = { id: "3", title: "New todo 3 title" };
+    let stateNewTitles = update("TODO_TITLE", data2, stateWithTodos);
+    stateNewTitles = update("TODO_TITLE", data3, stateNewTitles);
+    expect(stateNewTitles.todos[1].title).toEqual(data2.title);
+    expect(stateNewTitles.todos[2].title).toEqual(data3.title);
+  });
+
+  xit("DELETE action should remove a todo from state", () => {
+    // !!!
+  });
 });
