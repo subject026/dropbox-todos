@@ -32,8 +32,8 @@ module.exports = envIsProd => {
         filename: "index.html",
         template: "./src/index.html"
       }),
-      appUrl,
-      new BundleAnalyzerPlugin()
+      appUrl
+      // new BundleAnalyzerPlugin()
     ],
     module: {
       rules: [
