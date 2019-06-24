@@ -1,3 +1,3 @@
 # Dropbox Todo List
 
-Vanilla js todo list persisting data via the dropbox API
+[https://subject026.github.io/dropbox-todo/](https://subject026.github.io/dropbox-todo/)
