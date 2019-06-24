@@ -2,10 +2,36 @@ import generateID from "./generateID";
 
 import * as DBController from "../DropboxController";
 
+/**
+ * `update` updates app state based on the specified `action`
+ * @param {String} action - the desired action
+ * @param {Object} data - data required to carry out action
+ * @param {Object} state - the existing app state
+ * @return {Object} newState - the new updated app state
+ */
+
+export function update(action, data, state) {
+  const newState = JSON.parse(JSON.stringify(state));
+  switch (action) {
+    case "ADD":
+      newState.todos.push(data);
+      return newState;
+    case "TOGGLE":
+      const { id } = data;
+      const index = newState.todos.findIndex(todo => todo.id === id);
+      newState.todos[index].isComplete = !newState.todos[index].isComplete;
+      return newState;
+    default:
+      return newState;
+  }
+}
+
 export const initialState = {
   title: "New todo List",
   todos: []
 };
+
+let state;
 
 class Todo {
   constructor(todo, isComplete = false) {
@@ -25,11 +51,10 @@ function populate(data) {
  */
 
 export function init(data) {
+  state = initialState;
   if (data) {
     populate(data);
   } else {
-    state.title = "New todo list";
-    state.todos = [];
     DBController.saveData(state);
   }
 }
@@ -64,40 +89,14 @@ export function removeTodo(id) {
   DBController.saveData(state);
 }
 
-export function addMode(value) {
-  state.addMode = value;
-}
+// export function addMode(value) {
+//   state.addMode = value;
+// }
 
-export function isAddMode() {
-  return ({ addMode } = state);
-}
+// export function isAddMode() {
+//   return ({ addMode } = state);
+// }
 
 export function getState() {
   return { ...state };
-}
-
-/****************************************************************/
-
-/**
- * `update` updates app state based on the specified `action`
- * @param {String} action - the desired action
- * @param {Object} data - data required to carry out action
- * @param {Object} state - the existing app state
- * @return {Object} newState - the new updated app state
- */
-
-export function update(action, data, state) {
-  const newState = JSON.parse(JSON.stringify(state));
-  switch (action) {
-    case "ADD":
-      newState.todos.push(data);
-      return newState;
-    case "TOGGLE":
-      const { id } = data;
-      const index = newState.todos.findIndex(todo => todo.id === id);
-      newState.todos[index].isComplete = !newState.todos[index].isComplete;
-      return newState;
-    default:
-      return newState;
-  }
 }
