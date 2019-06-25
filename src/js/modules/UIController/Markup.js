@@ -15,7 +15,9 @@ export function authLink(url) {
 export function list(state) {
   return `
     <section class="list">
-      <h3 class="list__title" data-type="list-title">${state.title}</h3>
+      <section class="list__header">
+        <h3 class="list__title" data-type="list-title">${state.title}</h3>
+      </section>
       <ul class="list__todos">
         ${todos(state)}
       </ul>
@@ -29,7 +31,7 @@ export function list(state) {
 export function todo({ id, title, isComplete }) {
   return `
   <li class="list__item" data-id="${id}" draggable="true">
-    <section>
+    <section class="checkbox-container">
       <input type="checkbox" id="checkbox-${id}" data-type="checkbox"${isComplete ? "checked" : ""}>
       <label for="checkbox-${id}" class="list__label">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
