@@ -25,8 +25,7 @@
   display: grid;
   grid-template-columns: 1fr 8fr 1fr;
   input[type="checkbox"] {
-    position: relative;
-    left: 40px;
+    opacity: 0;
   }
 }
 
@@ -42,6 +41,7 @@
 
 .checkbox {
   opacity: 0;
+  transition: opacity 0.2s linear;
 }
 
 .checkbox--checked {

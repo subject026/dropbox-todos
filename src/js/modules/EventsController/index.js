@@ -10,11 +10,10 @@ function handleAddTodo(event) {
   document.addTodoForm.todoText.value = "";
 }
 
-function handleListClick(event) {
+function handleCheckboxToggle(event) {
   const listEl = event.target.closest(UIController.DOM.listItem);
-  if (listEl) {
-    StateController.toggleTodo(listEl.dataset.id);
-  }
+  StateController.toggleTodo(listEl.dataset.id);
+  listEl.querySelector(".checkbox").classList.toggle("checkbox--checked");
 }
 
 //
@@ -93,7 +92,7 @@ export function bindEvents() {
   const noteBin = document.querySelector(UIController.DOM.noteBin);
 
   listForm.addEventListener("submit", handleAddTodo);
-  list.addEventListener("click", handleListClick);
+  list.addEventListener("change", handleCheckboxToggle);
   list.addEventListener("dblclick", handleListDoubleClick);
   list.addEventListener("input", handleTextInput);
   list.addEventListener("focusout", handleBlur);
