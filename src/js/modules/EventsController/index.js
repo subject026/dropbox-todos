@@ -12,8 +12,11 @@ function handleAddTodo(event) {
 
 function handleCheckboxToggle(event) {
   const listEl = event.target.closest(UIController.DOM.listItem);
-  StateController.toggleTodo(listEl.dataset.id);
-  listEl.querySelector(".checkbox").classList.toggle("checkbox--checked");
+  // will also fire when todo is added - no listEl in this case
+  if (listEl) {
+    StateController.toggleTodo(listEl.dataset.id);
+    listEl.querySelector(".checkbox").classList.toggle("checkbox--checked");
+  }
 }
 
 //
