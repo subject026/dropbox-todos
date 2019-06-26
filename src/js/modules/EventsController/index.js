@@ -3,6 +3,7 @@ import * as UIController from "../UIController";
 
 function handleAddTodo(event) {
   event.preventDefault();
+  console.log("form submit firing");
   const todoText = document.addTodoForm.todoText.value;
   if (!todoText.length) return; // empty input
   const newTodo = StateController.addTodo(todoText);
@@ -28,9 +29,10 @@ function handleListDoubleClick(event) {
   if (elType === "list-title" || elType === "todo-text") {
     // if details or title
     UIController.makeEditable(el);
-    document.addEventListener("keydown", function(event) {
+    document.addEventListener("keydown", function handleKeydown(event) {
       if (event.key === "Enter" || event.key === "Escape") {
         event.preventDefault();
+        document.removeEventListener("keydown", handleKeydown);
         el.blur();
       }
     });
