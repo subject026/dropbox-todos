@@ -1,25 +1,27 @@
 .list {
   width: 100%;
   max-width: 400px;
+  margin: 40px 0;
   background-color: #f6f6f6;
   box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.07);
 }
 
 .list__header {
   background-color: #fff;
-  padding: 20px 25px;
+  padding: 10px 15px;
 }
 
 .list__title {
   margin: 0;
-  font-size: 1.6rem;
+  padding: 10px;
+  font-size: 1.4rem;
   &:hover {
     cursor: pointer;
   }
 }
 
 .list__todos {
-  min-height: 300px;
+  min-height: 200px;
   list-style-type: none;
   margin: 0;
   padding: 10px 15px;
@@ -55,7 +57,7 @@
 
 .checkbox {
   opacity: 0;
-  transition: opacity 0.2s linear;
+  transition: opacity 0.1s linear;
 }
 
 .checkbox--checked {
@@ -71,8 +73,43 @@
 }
 
 .list__item__details--edit {
-  background-color: azure;
   &:hover {
     cursor: text;
+  }
+}
+
+// Form
+
+.list__form {
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  grid-gap: 20px;
+  padding: 15px;
+}
+
+.list__form__input {
+  border: none;
+  border-bottom: 2px solid #dddddd;
+  padding: 5px;
+  font-size: 1rem;
+  &:focus {
+    outline: none;
+    border-bottom: 2px solid #aaa;
+  }
+}
+
+.list__form__button {
+  border: none;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #f1f1f1;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.1s linear, background-color 0.1s linear;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
   }
 }

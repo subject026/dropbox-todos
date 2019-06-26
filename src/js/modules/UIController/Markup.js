@@ -22,8 +22,8 @@ export function list(state) {
         ${todos(state)}
       </ul>
       <form name="addTodoForm" class="list__form">
-        <input name="todoText" type="text" />
-        <button type="submit">Add todo</button>
+        <input class="list__form__input" name="todoText" type="text" />
+        <button  class="list__form__button" type="submit">Add</button>
       </form>
     </section>`;
 }

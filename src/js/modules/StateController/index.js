@@ -44,7 +44,7 @@ export function update(action, data, state) {
 let state = {};
 
 export const initialState = {
-  title: "New todo List",
+  title: "New List",
   todos: []
 };
 
