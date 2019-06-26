@@ -3,7 +3,6 @@ import * as UIController from "../UIController";
 
 function handleAddTodo(event) {
   event.preventDefault();
-  console.log("form submit firing");
   const todoText = document.addTodoForm.todoText.value;
   if (!todoText.length) return; // empty input
   const newTodo = StateController.addTodo(todoText);
