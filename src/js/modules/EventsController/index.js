@@ -69,7 +69,8 @@ function handleDragStart(event) {
 }
 
 function handleDragEnter(event) {
-  event.target.classList.toggle("note-bin--hovered");
+  const binEl = event.target.closest(".note-bin");
+  binEl.classList.toggle("note-bin--hovered");
 }
 
 // need to prevent default dragover behaviour to allow drop
@@ -79,7 +80,8 @@ function handleDragOver(event) {
 
 function handleDragLeave(event) {
   event.preventDefault();
-  event.target.classList.toggle("note-bin--hovered");
+  const binEl = event.target.closest(".note-bin");
+  binEl.classList.toggle("note-bin--hovered");
 }
 
 function handleDrop(event) {
@@ -87,7 +89,8 @@ function handleDrop(event) {
   const id = event.dataTransfer.getData("text");
   StateController.removeTodo(id);
   UIController.removeTodo(id);
-  event.target.classList.toggle("note-bin--hovered");
+  const binEl = event.target.closest(".note-bin");
+  binEl.classList.toggle("note-bin--hovered");
 }
 
 export function bindEvents() {
