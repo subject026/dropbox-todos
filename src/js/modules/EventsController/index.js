@@ -15,7 +15,7 @@ function handleCheckboxToggle(event) {
   // will also fire when todo is added - no listEl in this case
   if (listEl) {
     StateController.toggleTodo(listEl.dataset.id);
-    listEl.querySelector(".checkbox").classList.toggle("checkbox--checked");
+    listEl.classList.toggle("list__item--checked");
   }
 }
 
