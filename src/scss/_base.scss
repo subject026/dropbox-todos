@@ -1,3 +1,7 @@
+$headerHeight: 60px;
+$footerHeight: 30px;
+$mainMinHeight: calc(100vh - (#{$headerHeight} + #{$footerHeight}));
+
 body {
   margin: 0;
   background-color: #ececec;
@@ -9,11 +13,17 @@ body {
 .header {
   background-color: #fff;
   box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.07);
-  height: 60px;
   width: 100%;
   position: fixed;
   top: 0;
   z-index: 10;
+}
+
+.header__inner {
+  height: $headerHeight;
+  max-width: 800px;
+  margin: auto;
+  padding: 0 15px;
   display: flex;
   justify-content: flex-end;
 }
@@ -26,7 +36,7 @@ body {
   background-color: rgba(0, 0, 0, 0);
   svg {
     fill: rgba(0, 0, 0, 0.54);
-    width: 50%;
+    width: 40%;
     height: auto;
     transition: transform 0.05s linear, fill 0.05s linear;
   }
@@ -40,14 +50,14 @@ body {
 }
 
 .main {
-  min-height: calc(100vh - (60px + 30px));
-  margin-top: 60px;
+  margin-top: $headerHeight;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: $mainMinHeight;
 }
 
 .footer {
-  height: 30px;
+  height: $footerHeight;
   background-color: #303030;
 }
