@@ -20,7 +20,7 @@ let listEl;
 export function renderAuthenticateLink() {
   const url = DropboxController.getAuthenticationLink();
   const el = Markup.authLink(url);
-  document.querySelector(DOM.header).insertAdjacentHTML("beforeend", el);
+  document.querySelector(DOM.main).insertAdjacentHTML("beforeend", el);
 }
 
 export const loading = {
