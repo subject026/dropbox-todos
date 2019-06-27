@@ -29,14 +29,14 @@ body {
 }
 
 .note-bin {
-  width: 80px;
+  width: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0);
   svg {
     fill: rgba(0, 0, 0, 0.54);
-    width: 40%;
+    width: 60%;
     height: auto;
     transition: transform 0.05s linear, fill 0.05s linear;
   }
@@ -50,7 +50,10 @@ body {
 }
 
 .main {
+  max-width: 800px;
+  margin: auto;
   margin-top: $headerHeight;
+  padding: 0 15px;
   display: flex;
   justify-content: center;
   align-items: center;
