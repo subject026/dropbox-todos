@@ -56,6 +56,12 @@ export function makeEditable(node) {
   node.contentEditable = true;
   node.classList.toggle("list__item__details--edit");
   node.focus();
+  /* From MDN:
+
+  When an HTML document has been switched to designMode, its document object exposes an execCommand method to run commands that manipulate the current editable region, such as form inputs or contentEditable elements.
+  */
+  // select all element text:
+  document.execCommand("selectAll", false, null);
 }
 
 export function makeUnEditable(node) {
