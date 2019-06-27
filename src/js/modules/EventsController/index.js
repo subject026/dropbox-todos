@@ -8,6 +8,7 @@ function handleAddTodo(event) {
   const newTodo = StateController.addTodo(todoText);
   UIController.addTodo(newTodo);
   document.addTodoForm.todoText.value = "";
+  document.addTodoForm.todoText.focus();
 }
 
 function handleCheckboxToggle(event) {
