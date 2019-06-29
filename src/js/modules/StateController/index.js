@@ -3,6 +3,23 @@ import { generateID, getTodoIndex } from "./Util";
 import * as DBController from "../DropboxController";
 
 /**
+ *
+ * @param {String} property - the desired state item
+ * @param {Object} state - the existing app state
+ * @return {String} value - the requested value from state
+ */
+
+export function getFromState(property, state) {
+  switch (property) {
+    // get token
+
+    // get timestamp
+    default:
+      return null;
+  }
+}
+
+/**
  * `update` updates app state based on the specified `action`
  * @param {String} action - the desired action
  * @param {Object} data - data required to carry out action
