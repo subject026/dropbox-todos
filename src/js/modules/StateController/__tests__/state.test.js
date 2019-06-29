@@ -1,4 +1,4 @@
-import { initialState, update } from "../index";
+import { initialState, update, getFromState } from "../index";
 import { getTodoIndex } from "../Util";
 
 const testData = {
@@ -16,6 +16,12 @@ describe("State Update Function", () => {
     const result = update(null, {}, initialState);
     expect(result).not.toBe(initialState); // should return a new obj
     expect(result).toEqual(initialState); // new obj should match state passed in
+  });
+
+  it("TOKEN action should add and/or update token in state", () => {
+    const token = "abcdefg";
+    const stateWithToken = update("TOKEN", { token }, initialState);
+    expect(stateWithToken.token).toEqual(token);
   });
 
   it("HYDRATE action should hydrate app state", () => {
@@ -79,5 +85,12 @@ describe("State Update Function", () => {
     expect(stateTodosDeleted.todos).toHaveLength(2);
     expect(getTodoIndex(stateTodosDeleted.todos, data1.id)).toBe(false);
     expect(getTodoIndex(stateTodosDeleted.todos, data3.id)).toBe(false);
+  });
+});
+
+describe("getFromState function", () => {
+  xit("should return dbToken if dbToken is requested", () => {
+    const result = getFromState("DB_TOKEN", state);
+    expect;
   });
 });
