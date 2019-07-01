@@ -1,3 +1,35 @@
+  // check local storage for list data 
+
+    // if data:
+      // -> render list
+
+    LATER
+    ****************************************************************************
+      // -> check for DB connection
+
+        // if DB connected:
+          // -> check dropbox for more recent data
+            
+            // if more recent data:
+              // -> ask whether to use DB data or lose DB data
+    ****************************************************************************
+
+    // if no data:
+
+    LATER
+    ****************************************************************************
+      // offer DB connection
+
+        // if yes:
+          // -> connect to DB and check for data
+    ****************************************************************************
+    
+      // -> initialise new state object in localStorage 
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////
 // Features 
 
@@ -12,9 +44,3 @@
 // Refactorings
 
   - make module imports/exports consistent
-
-  - seperate initialisation functionality, window.onload = xxx
-
-  - seperate events controller
-
-  - singleton for dbx instance?
