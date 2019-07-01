@@ -1,23 +1,7 @@
 import { generateID, getTodoIndex } from "./Util";
+import { getAppData, setAppData } from "../LocalStorageController";
 
-import * as DBController from "../DropboxController";
-
-/**
- *
- * @param {String} property - the desired state item
- * @param {Object} state - the existing app state
- * @return {String} value - the requested value from state
- */
-
-export function getFromState(property, state) {
-  switch (property) {
-    // get token
-
-    // get timestamp
-    default:
-      return null;
-  }
-}
+// import * as DBController from "../DropboxController";
 
 /**
  * `update` updates app state based on the specified `action`
@@ -32,24 +16,30 @@ export function update(action, data, state) {
   let index;
   switch (action) {
     case "HYDRATE":
+      newState.timestamp = data.timestamp;
       newState.title = data.title;
       newState.todos = data.todos;
       return newState;
     case "LIST_TITLE":
+      newState.timestamp = Date.now();
       newState.title = data.title;
       return newState;
     case "ADD":
+      newState.timestamp = Date.now();
       newState.todos.push(data);
       return newState;
     case "TOGGLE":
+      newState.timestamp = Date.now();
       index = getTodoIndex(newState.todos, data.id);
       newState.todos[index].isComplete = !newState.todos[index].isComplete;
       return newState;
     case "TODO_TITLE":
+      newState.timestamp = Date.now();
       index = getTodoIndex(newState.todos, data.id);
       newState.todos[index].title = data.title;
       return newState;
     case "DELETE":
+      newState.timestamp = Date.now();
       index = getTodoIndex(newState.todos, data.id);
       newState.todos = [...newState.todos.slice(0, index), ...newState.todos.slice(index + 1)];
       return newState;
@@ -58,9 +48,8 @@ export function update(action, data, state) {
   }
 }
 
-let state = {};
-
 export const initialState = {
+  timestamp: null,
   title: "New List",
   todos: []
 };
@@ -69,46 +58,37 @@ export const initialState = {
  * API
  */
 
-export function init(data) {
-  if (data) {
-    state = update("HYDRATE", data, state);
-  } else {
-    state = initialState;
-    DBController.saveData(state);
-  }
-}
-
 export function addTodo(title) {
   const newTodo = {
     id: generateID(),
     title,
     isComplete: false
   };
-  state = update("ADD", newTodo, state);
-  DBController.saveData(state);
+  setAppData(update("ADD", newTodo, getAppData()));
   return newTodo;
 }
 
 export function updateTitle(title) {
-  state = update("LIST_TITLE", { title }, state);
-  DBController.saveData(state);
+  setAppData(update("LIST_TITLE", { title }, getAppData()));
 }
 
 export function editTodoText(id, title) {
-  state = update("TODO_TITLE", { id, title }, state);
-  DBController.saveData(state);
+  setAppData(update("TODO_TITLE", { id, title }, getAppData()));
 }
 
 export function toggleTodo(id) {
-  state = update("TOGGLE", { id }, state);
-  DBController.saveData(state);
+  setAppData(update("TOGGLE", { id }, getAppData()));
 }
 
 export function removeTodo(id) {
-  state = update("DELETE", { id }, state);
-  DBController.saveData(state);
+  setAppData(update("DELETE", { id }, getAppData()));
 }
 
 export function getState() {
-  return JSON.parse(JSON.stringify(state));
+  // initialise if there's no app data
+  if (!getAppData()) {
+    initialState.timestamp = Date.now();
+    setAppData(initialState);
+  }
+  return getAppData();
 }
