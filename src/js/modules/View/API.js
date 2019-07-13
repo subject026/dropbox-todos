@@ -1,21 +1,8 @@
-import * as DropboxController from "../DropboxController";
+import DOM from "./DOM";
 import * as Markup from "./Markup";
 
-export const DOM = {
-  header: ".header",
-  buttonAuthenticate: "#button-authenticate",
-  noteBin: ".note-bin",
-  main: ".main",
-  loadingTodos: ".loading-todos",
-  list: ".list",
-  listTitle: ".list__title",
-  todos: ".list__todos",
-  listItem: ".list__item",
-  listForm: ".list__form"
-};
-
 const mainEl = document.querySelector(DOM.main);
-let listEl;
+let listEl; // value set once list rendered
 
 export function renderAuthenticateLink() {
   const url = DropboxController.getAuthenticationLink();

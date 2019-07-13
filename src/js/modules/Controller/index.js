@@ -1,21 +1,21 @@
-import * as StateController from "../StateController";
-import * as UIController from "../UIController";
+import * as State from "../Model";
+import * as View from "../View";
 
 function handleAddTodo(event) {
   event.preventDefault();
   const todoText = document.addTodoForm.todoText.value;
   if (!todoText.length) return; // empty input
-  const newTodo = StateController.addTodo(todoText);
-  UIController.addTodo(newTodo);
+  const newTodo = State.addTodo(todoText);
+  View.addTodo(newTodo);
   document.addTodoForm.todoText.value = "";
   document.addTodoForm.todoText.focus();
 }
 
 function handleCheckboxToggle(event) {
-  const listEl = event.target.closest(UIController.DOM.listItem);
+  const listEl = event.target.closest(View.DOM.listItem);
   // will also fire when todo is added - no listEl in this case
   if (listEl) {
-    StateController.toggleTodo(listEl.dataset.id);
+    State.toggleTodo(listEl.dataset.id);
     listEl.classList.toggle("list__item--checked");
   }
 }
@@ -28,7 +28,7 @@ function handleListDoubleClick(event) {
   const elType = el.dataset.type;
   if (elType === "list-title" || elType === "todo-text") {
     // if details or title
-    UIController.makeEditable(el);
+    View.makeEditable(el);
     document.addEventListener("keydown", function handleKeydown(event) {
       if (event.key === "Enter" || event.key === "Escape") {
         event.preventDefault();
@@ -42,7 +42,7 @@ function handleListDoubleClick(event) {
 function handleBlur(event) {
   const trimmed = event.target.textContent.trim();
   event.target.textContent = trimmed;
-  UIController.makeUnEditable(event.target);
+  View.makeUnEditable(event.target);
 }
 
 function handleTextInput(event) {
@@ -50,12 +50,12 @@ function handleTextInput(event) {
   // will either be editing list title or todo text
   switch (el.dataset.type) {
     case "list-title":
-      StateController.updateTitle(event.target.textContent);
+      State.updateTitle(event.target.textContent);
       break;
     case "todo-text":
-      const id = event.target.closest(UIController.DOM.listItem).dataset.id;
+      const id = event.target.closest(View.DOM.listItem).dataset.id;
       const newText = el.textContent;
-      StateController.editTodoText(id, newText);
+      State.editTodoText(id, newText);
       break;
     default:
     // do nothing
@@ -88,16 +88,16 @@ function handleDragLeave(event) {
 function handleDrop(event) {
   event.preventDefault();
   const id = event.dataTransfer.getData("text");
-  StateController.removeTodo(id);
-  UIController.removeTodo(id);
+  State.removeTodo(id);
+  View.removeTodo(id);
   const binEl = event.target.closest(".note-bin");
   binEl.classList.toggle("note-bin--hovered");
 }
 
 export function bindEvents() {
-  const list = document.querySelector(UIController.DOM.list);
-  const listForm = document.querySelector(UIController.DOM.listForm);
-  const noteBin = document.querySelector(UIController.DOM.noteBin);
+  const list = document.querySelector(View.DOM.list);
+  const listForm = document.querySelector(View.DOM.listForm);
+  const noteBin = document.querySelector(View.DOM.noteBin);
 
   listForm.addEventListener("submit", handleAddTodo);
   list.addEventListener("change", handleCheckboxToggle);

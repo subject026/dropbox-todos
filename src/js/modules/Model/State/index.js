@@ -1,5 +1,5 @@
 import { generateID, getTodoIndex } from "./Util";
-import { getAppData, setAppData } from "../LocalStorageController";
+import { getAppData, setAppData } from "../LocalStorage";
 
 // import * as DBController from "../DropboxController";
 
