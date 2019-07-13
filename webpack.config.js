@@ -7,12 +7,14 @@ module.exports = envIsProd => {
   let appUrl, devtool;
   if (envIsProd) {
     appUrl = new webpack.DefinePlugin({
-      APP_URL: JSON.stringify("https://subject026.github.io/dropbox-todo/")
+      APP_URL: JSON.stringify("https://subject026.github.io/dropbox-todo/"),
+      BUILD_STAMP: Date.now()
     });
     devtool = false;
   } else {
     appUrl = new webpack.DefinePlugin({
-      APP_URL: JSON.stringify("http://localhost:1111")
+      APP_URL: JSON.stringify("http://localhost:1111"),
+      BUILD_STAMP: false
     });
     devtool = "cheap-eval-source-map";
   }

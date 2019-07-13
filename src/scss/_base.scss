@@ -23,7 +23,7 @@ body {
   height: $headerHeight;
   max-width: 800px;
   margin: auto;
-  padding: 0 15px;
+  padding: 0 1rem;
   display: flex;
   justify-content: flex-end;
 }
@@ -53,7 +53,7 @@ body {
   max-width: 800px;
   margin: auto;
   margin-top: $headerHeight;
-  padding: 0 15px;
+  padding: 0 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,5 +62,18 @@ body {
 
 .footer {
   height: $footerHeight;
-  background-color: #303030;
+  background-color: #202020;
+  color: #a3a3a3;
+  display: flex;
+  align-items: center;
+  div {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 0 1rem;
+    padding: 0 1rem;
+
+    font-size: 12px;
+    font-weight: 600;
+  }
 }

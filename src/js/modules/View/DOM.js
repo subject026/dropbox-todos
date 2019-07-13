@@ -8,5 +8,6 @@ export default {
   listTitle: ".list__title",
   todos: ".list__todos",
   listItem: ".list__item",
-  listForm: ".list__form"
+  listForm: ".list__form",
+  footer: ".footer"
 };

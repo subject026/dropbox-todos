@@ -1,46 +1,23 @@
-  // check local storage for list data 
+LATER
+****************************************************************************
+  // -> check for DB connection
 
-    // if data:
-      // -> render list
+    // if DB connected:
+      // -> check dropbox for more recent data
+        
+        // if more recent data:
+          // -> ask whether to use DB data or lose DB data
+****************************************************************************
 
-    LATER
-    ****************************************************************************
-      // -> check for DB connection
+// if no data:
 
-        // if DB connected:
-          // -> check dropbox for more recent data
-            
-            // if more recent data:
-              // -> ask whether to use DB data or lose DB data
-    ****************************************************************************
+LATER
+****************************************************************************
+  // offer DB connection
 
-    // if no data:
+    // if yes:
+      // -> connect to DB and check for data
+****************************************************************************
 
-    LATER
-    ****************************************************************************
-      // offer DB connection
+  // -> initialise new state object in localStorage 
 
-        // if yes:
-          // -> connect to DB and check for data
-    ****************************************************************************
-    
-      // -> initialise new state object in localStorage 
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////
-// Features 
-
-  - prevent return key default behavior while in edit mode
-
-  - figma design
-
-
-
-
-////////////////////////////////////////////////////////////////////////
-// Refactorings
-
-  - make module imports/exports consistent

@@ -4,6 +4,11 @@ import * as Markup from "./Markup";
 const mainEl = document.querySelector(DOM.main);
 let listEl; // value set once list rendered
 
+export function renderBuildStamp(stamp) {
+  const footerEl = document.querySelector(DOM.footer);
+  footerEl.innerHTML = `<div>Built ${new Date(stamp).toLocaleString()}</div>`;
+}
+
 export function renderAuthenticateLink() {
   const url = DropboxController.getAuthenticationLink();
   const el = Markup.authLink(url);
@@ -21,6 +26,10 @@ export const loading = {
   }
 };
 
+/**
+ *  List
+ */
+
 export function renderList(state) {
   mainEl.innerHTML = Markup.list(state);
   listEl = document.querySelector(DOM.todos);
@@ -35,11 +44,11 @@ export function removeTodo(id) {
   listEl.parentElement.removeChild(listEl);
 }
 
-//
-// edit mode
-//
+/**
+ * Editmode
+ */
 
-export function makeEditable(node) {
+export function editNodeOn(node) {
   node.contentEditable = true;
   node.classList.toggle("list__item__details--edit");
   node.focus();
@@ -51,7 +60,7 @@ export function makeEditable(node) {
   document.execCommand("selectAll", false, null);
 }
 
-export function makeUnEditable(node) {
+export function editNodeOff(node) {
   node.contentEditable = false;
   node.classList.toggle("list__item__details--edit");
 }

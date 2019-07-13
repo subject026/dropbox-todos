@@ -1,8 +1,12 @@
-import { renderList } from "./View";
+import { renderList, renderBuildStamp } from "./View";
 import { bindEvents } from "./Controller";
 import { getState } from "./Model";
 
-export default async function init() {
+export default function init() {
   renderList(getState());
   bindEvents();
+  // render build date time if env is prod
+  if (BUILD_STAMP) {
+    renderBuildStamp(BUILD_STAMP);
+  }
 }

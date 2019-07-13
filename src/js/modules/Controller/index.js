@@ -1,5 +1,6 @@
 import * as State from "../Model";
 import * as View from "../View";
+import { editNodeOn, editNodeOff } from "../View";
 
 function handleAddTodo(event) {
   event.preventDefault();
@@ -28,7 +29,7 @@ function handleListDoubleClick(event) {
   const elType = el.dataset.type;
   if (elType === "list-title" || elType === "todo-text") {
     // if details or title
-    View.makeEditable(el);
+    editNodeOn(el);
     document.addEventListener("keydown", function handleKeydown(event) {
       if (event.key === "Enter" || event.key === "Escape") {
         event.preventDefault();
@@ -42,7 +43,7 @@ function handleListDoubleClick(event) {
 function handleBlur(event) {
   const trimmed = event.target.textContent.trim();
   event.target.textContent = trimmed;
-  View.makeUnEditable(event.target);
+  editNodeOff(event.target);
 }
 
 function handleTextInput(event) {
