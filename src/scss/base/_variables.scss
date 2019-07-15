@@ -1,0 +1,7 @@
+$white: #fff;
+
+$headerHeight: 60px;
+$footerHeight: 30px;
+$mainMinHeight: calc(100vh - (#{$headerHeight} + #{$footerHeight}));
+
+$nav_transition: 0.2s cubic-bezier(0.98, 0.03, 0.2, 0.93);

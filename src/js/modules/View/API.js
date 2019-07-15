@@ -1,7 +1,7 @@
 import DOM from "./DOM";
 import * as Markup from "./Markup";
 
-const mainEl = document.querySelector(DOM.main);
+const mainEl = document.querySelector(DOM.sel.main);
 let listEl; // value set once list rendered
 
 export function renderBuildStamp(stamp) {

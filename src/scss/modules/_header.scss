@@ -1,0 +1,16 @@
+.header__inner {
+  height: $headerHeight;
+  max-width: 800px;
+  margin: auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.note-bin {
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0);
+}

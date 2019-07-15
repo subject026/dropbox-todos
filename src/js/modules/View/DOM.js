@@ -1,4 +1,11 @@
 export default {
+  sel: {
+    main: "[data-js=main]",
+    noteBin: "[data-js=note-bin]"
+  },
+  cls: {
+    iconNoteBinHovered: "icon-note-bin--hovered"
+  },
   header: ".header",
   buttonAuthenticate: "#button-authenticate",
   noteBin: ".note-bin",

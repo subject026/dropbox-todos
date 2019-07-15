@@ -1,0 +1,20 @@
+%icon {
+  width: 25px;
+  height: 25px;
+}
+
+.icon-nav-toggle {
+  @extend %icon;
+  fill: rgba(0, 0, 0, 0.54);
+}
+
+.icon-note-bin {
+  @extend %icon;
+  fill: rgba(0, 0, 0, 0.54);
+  transition: transform 0.05s linear, fill 0.05s linear;
+}
+
+.icon-note-bin--hovered {
+  transform: scale(1.5);
+  fill: rgba(0, 0, 0, 0.74);
+}

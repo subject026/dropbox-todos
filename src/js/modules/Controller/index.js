@@ -1,6 +1,6 @@
 import * as State from "../Model";
 import * as View from "../View";
-import { editNodeOn, editNodeOff } from "../View";
+import { DOM, editNodeOn, editNodeOff } from "../View";
 
 function handleAddTodo(event) {
   event.preventDefault();
@@ -13,7 +13,7 @@ function handleAddTodo(event) {
 }
 
 function handleCheckboxToggle(event) {
-  const listEl = event.target.closest(View.DOM.listItem);
+  const listEl = event.target.closest(DOM.listItem);
   // will also fire when todo is added - no listEl in this case
   if (listEl) {
     State.toggleTodo(listEl.dataset.id);
@@ -29,7 +29,7 @@ function handleListDoubleClick(event) {
   const elType = el.dataset.type;
   if (elType === "list-title" || elType === "todo-text") {
     // if details or title
-    editNodeOn(el);
+    View.editNodeOn(el);
     document.addEventListener("keydown", function handleKeydown(event) {
       if (event.key === "Enter" || event.key === "Escape") {
         event.preventDefault();
@@ -43,7 +43,7 @@ function handleListDoubleClick(event) {
 function handleBlur(event) {
   const trimmed = event.target.textContent.trim();
   event.target.textContent = trimmed;
-  editNodeOff(event.target);
+  View.editNodeOff(event.target);
 }
 
 function handleTextInput(event) {
@@ -54,7 +54,7 @@ function handleTextInput(event) {
       State.updateTitle(event.target.textContent);
       break;
     case "todo-text":
-      const id = event.target.closest(View.DOM.listItem).dataset.id;
+      const id = event.target.closest(DOM.listItem).dataset.id;
       const newText = el.textContent;
       State.editTodoText(id, newText);
       break;
@@ -71,8 +71,9 @@ function handleDragStart(event) {
 }
 
 function handleDragEnter(event) {
-  const binEl = event.target.closest(".note-bin");
-  binEl.classList.toggle("note-bin--hovered");
+  // event.target may be svg > path so make sure we've got the actual svg
+  const binEl = event.target.closest(DOM.sel.noteBin);
+  binEl.classList.toggle(DOM.cls.iconNoteBinHovered);
 }
 
 // need to prevent default dragover behaviour to allow drop
@@ -82,8 +83,8 @@ function handleDragOver(event) {
 
 function handleDragLeave(event) {
   event.preventDefault();
-  const binEl = event.target.closest(".note-bin");
-  binEl.classList.toggle("note-bin--hovered");
+  const binEl = event.target.closest(DOM.sel.noteBin);
+  binEl.classList.toggle(DOM.cls.iconNoteBinHovered);
 }
 
 function handleDrop(event) {
@@ -91,14 +92,14 @@ function handleDrop(event) {
   const id = event.dataTransfer.getData("text");
   State.removeTodo(id);
   View.removeTodo(id);
-  const binEl = event.target.closest(".note-bin");
-  binEl.classList.toggle("note-bin--hovered");
+  const binEl = event.target.closest(DOM.sel.noteBin);
+  binEl.classList.toggle(DOM.cls.iconNoteBinHovered);
 }
 
 export function bindEvents() {
-  const list = document.querySelector(View.DOM.list);
-  const listForm = document.querySelector(View.DOM.listForm);
-  const noteBin = document.querySelector(View.DOM.noteBin);
+  const list = document.querySelector(DOM.list);
+  const listForm = document.querySelector(DOM.listForm);
+  const noteBin = document.querySelector(DOM.sel.noteBin);
 
   listForm.addEventListener("submit", handleAddTodo);
   list.addEventListener("change", handleCheckboxToggle);
