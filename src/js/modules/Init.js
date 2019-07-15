@@ -9,7 +9,7 @@ export default function init() {
     navigator.serviceWorker
       .register("./sw.js")
       .then(registration => {
-        console.log("SW registered: ", registration);
+        console.log("SW registered ⚙️");
       })
       .catch(err => {
         console.error(err);
