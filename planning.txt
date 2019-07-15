@@ -1,23 +1,15 @@
-LATER
-****************************************************************************
+On window focus once DB reconnected...
+
+
   // -> check for DB connection
 
-    // if DB connected:
+    // if DB connected
+
+      // check for network connection
+        // if no network add warning to navbar
+
       // -> check dropbox for more recent data
         
-        // if more recent data:
-          // -> ask whether to use DB data or lose DB data
-****************************************************************************
-
-// if no data:
-
-LATER
-****************************************************************************
-  // offer DB connection
-
-    // if yes:
-      // -> connect to DB and check for data
-****************************************************************************
-
-  // -> initialise new state object in localStorage 
+        // if more recent data
+          // get data and update local state / re-render
 
