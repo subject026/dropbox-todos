@@ -34,7 +34,8 @@
     margin-top: 10px;
   }
   display: grid;
-  grid-template-columns: 1fr 8fr;
+  grid-template-columns: 30px auto;
+  grid-gap: 10px;
   input[type="checkbox"] {
     opacity: 0;
   }

@@ -1,10 +1,13 @@
 export default {
   sel: {
     main: "[data-js=main]",
-    noteBin: "[data-js=note-bin]"
+    noteBin: "[data-js=note-bin]",
+    navToggle: "[data-js=nav-toggle]",
+    nav: "[data-js=nav]"
   },
   cls: {
-    iconNoteBinHovered: "icon-note-bin--hovered"
+    iconNoteBinHovered: "icon-note-bin--hovered",
+    navIsVisible: "layout-nav--is-visible"
   },
   header: ".header",
   buttonAuthenticate: "#button-authenticate",

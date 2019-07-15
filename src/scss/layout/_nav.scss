@@ -1,8 +1,15 @@
 .layout-nav {
-  min-height: 100vh;
+  height: 100vh;
   position: fixed;
   top: 0;
-  z-index: 5;
-  width: 200px;
-  background-color: red;
+  left: -$nav_width;
+  z-index: 6;
+  width: $nav_width;
+  padding-top: $header_height;
+  background-color: $white;
+  transition: $nav_transition;
+}
+
+.layout-nav--is-visible {
+  transform: translateX(100%);
 }

@@ -2,6 +2,12 @@ import * as State from "../Model";
 import * as View from "../View";
 import { DOM, editNodeOn, editNodeOff } from "../View";
 
+function handleNavToggle(nav) {
+  return function() {
+    nav.classList.toggle(DOM.cls.navIsVisible);
+  };
+}
+
 function handleAddTodo(event) {
   event.preventDefault();
   const todoText = document.addTodoForm.todoText.value;
@@ -97,6 +103,10 @@ function handleDrop(event) {
 }
 
 export function bindEvents() {
+  const navToggle = document.querySelector(DOM.sel.navToggle);
+  const nav = document.querySelector(DOM.sel.nav);
+  navToggle.addEventListener("click", handleNavToggle(nav));
+
   const list = document.querySelector(DOM.list);
   const listForm = document.querySelector(DOM.listForm);
   const noteBin = document.querySelector(DOM.sel.noteBin);

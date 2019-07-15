@@ -8,11 +8,20 @@
     <link rel="manifest" href="manifest.json" />
   </head>
   <body>
+    <div class="header__nav-toggle-container">
+      <svg class="icon-nav-toggle" data-js="nav-toggle" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M3 8V6H21V8H3ZM3 13H21V11H3V13ZM3 18H21V16H3V18Z" />
+      </svg>
+    </div>
+    <nav class="layout-nav" data-js="nav">
+      <ul>
+        <li>Some Link</li>
+        <li>Some Link</li>
+        <li>Some Link</li>
+      </ul>
+    </nav>
     <header class="layout-header">
       <section class="header__inner">
-        <svg class="icon-nav-toggle" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M3 8V6H21V8H3ZM3 13H21V11H3V13ZM3 18H21V16H3V18Z" />
-        </svg>
         <svg class="icon-note-bin" data-js="note-bin" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path
             fill-rule="evenodd"
@@ -22,13 +31,6 @@
         </svg>
       </section>
     </header>
-    <nav class="layout-nav">
-      <ul>
-        <li>Some Link</li>
-        <li>Some Link</li>
-        <li>Some Link</li>
-      </ul>
-    </nav>
     <main class="layout-main" data-js="main"></main>
     <footer class="layout-footer"></footer>
   </body>

@@ -1,0 +1,5 @@
+@mixin screenLarge() {
+  @media (min-width: 800px) {
+    @content;
+  }
+}
