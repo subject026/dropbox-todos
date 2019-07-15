@@ -1,0 +1,8 @@
+{
+  "short_name": "Attendees",
+  "name": "Attendees",
+  "background-color": "#303030",
+  "theme-color": "#00897b",
+  "start_url": "/",
+  "display": "standalone"
+}
