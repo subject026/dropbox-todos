@@ -1,30 +1,40 @@
 import DOM from "./DOM";
 import * as Markup from "./Markup";
+import { getAuthenticationLink } from "../Model";
 
-const mainEl = document.querySelector(DOM.sel.main);
-let listEl; // value set once list rendered
+// nav
 
+export function renderNav(token) {
+  if (token) {
+    // render disconnect link
+  } else {
+    // render DB connect link
+    const navMenu = document.querySelector(DOM.sel.navMenu);
+    const url = getAuthenticationLink();
+    navMenu.innerHTML = `<li><a href="${url}">Connect to Dropbox</a></li>`;
+  }
+}
+
+// !!! move build stamp to bottom of nav
 export function renderBuildStamp(stamp) {
   const footerEl = document.querySelector(DOM.footer);
   footerEl.innerHTML = `<div>Built ${new Date(stamp).toLocaleString()}</div>`;
 }
 
-export function renderAuthenticateLink() {
-  const url = DropboxController.getAuthenticationLink();
-  const el = Markup.authLink(url);
-  document.querySelector(DOM.main).insertAdjacentHTML("beforeend", el);
-}
+// list
+const mainEl = document.querySelector(DOM.sel.main);
+let listEl; // value set once list rendered
 
-export const loading = {
-  html: `<span class="loading-todos">Loading todos...</span>`,
-  render() {
-    document.querySelector(DOM.main).innerHTML = this.html;
-  },
-  remove() {
-    const loadingEl = document.querySelector(DOM.loadingTodos);
-    document.querySelector(DOM.loadingTodos).parentNode.removeChild(loadingEl);
-  }
-};
+// export const loading = {
+//   html: `<span class="loading-todos">Loading todos...</span>`,
+//   render() {
+//     document.querySelector(DOM.main).innerHTML = this.html;
+//   },
+//   remove() {
+//     const loadingEl = document.querySelector(DOM.loadingTodos);
+//     document.querySelector(DOM.loadingTodos).parentNode.removeChild(loadingEl);
+//   }
+// };
 
 /**
  *  List

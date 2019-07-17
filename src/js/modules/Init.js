@@ -1,6 +1,6 @@
-import { renderList, renderBuildStamp } from "./View";
+import { renderList, renderNav, renderBuildStamp } from "./View";
 import { bindEvents } from "./Controller";
-import { getState } from "./Model";
+import { getState, getTokenLocal } from "./Model";
 
 export default function init() {
   // register SW
@@ -8,7 +8,7 @@ export default function init() {
     // register our service worker
     navigator.serviceWorker
       .register("./sw.js")
-      .then(registration => {
+      .then(() => {
         console.log("SW registered ⚙️");
       })
       .catch(err => {
@@ -16,7 +16,11 @@ export default function init() {
       });
   }
 
+  // render todo list
   renderList(getState());
+
+  // render nav link
+  renderNav(getTokenLocal());
   bindEvents();
   // render build date time if env is prod
   if (BUILD_STAMP) {

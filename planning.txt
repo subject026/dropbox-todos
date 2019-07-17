@@ -1,5 +1,8 @@
-On window focus once DB reconnected...
 
+ Later
+=======
+
+On window focus once DB reconnected...
 
   // -> check for DB connection
 

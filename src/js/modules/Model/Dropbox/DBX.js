@@ -1,6 +1,6 @@
 import { Dropbox } from "dropbox";
 
-import { getTokenLocal } from "../LocalStorageController";
+import { getTokenLocal } from "../";
 
 let instance;
 

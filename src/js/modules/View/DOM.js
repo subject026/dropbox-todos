@@ -3,7 +3,8 @@ export default {
     main: "[data-js=main]",
     noteBin: "[data-js=note-bin]",
     navToggle: "[data-js=nav-toggle]",
-    nav: "[data-js=nav]"
+    nav: "[data-js=nav]",
+    navMenu: "[data-js=nav-menu]"
   },
   cls: {
     iconNoteBinHovered: "icon-note-bin--hovered",

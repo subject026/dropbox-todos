@@ -1,9 +1,9 @@
 export function getTokenLocal() {
-  return localStorage.getItem("dropboxTodoToken");
+  return localStorage.getItem("dropboxToken");
 }
 
 export function setTokenLocal(token) {
-  localStorage.setItem("dropboxTodoToken", token);
+  localStorage.setItem("dropboxToken", token);
 }
 
 export function getAppData() {
