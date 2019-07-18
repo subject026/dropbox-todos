@@ -6,7 +6,9 @@ import { getAuthenticationLink } from "../Model";
 
 export function renderNav(token) {
   if (token) {
-    // render disconnect link
+    const nav = document.querySelector(DOM.sel.nav);
+    nav.insertAdjacentHTML("afterbegin", `<h3>Dropbox Connected</h3>`);
+    // !!! add disconnect link
   } else {
     // render DB connect link
     const navMenu = document.querySelector(DOM.sel.navMenu);

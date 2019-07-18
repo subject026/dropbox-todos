@@ -1,6 +1,6 @@
 import { renderList, renderNav, renderBuildStamp } from "./View";
 import { bindEvents } from "./Controller";
-import { getState, getTokenLocal } from "./Model";
+import { getState, getTokenLocal, setTokenLocal } from "./Model";
 
 export default function init() {
   // register SW
@@ -16,12 +16,21 @@ export default function init() {
       });
   }
 
-  // render todo list
+  // if there's a hash save token to local storage
+  const urlToken = window.location.hash;
+  if (urlToken) {
+    const token = urlToken.split("access_token=")[1].split("&")[0];
+    setTokenLocal(token);
+    history.pushState("", document.title, "/");
+  }
+
   renderList(getState());
 
-  // render nav link
   renderNav(getTokenLocal());
+
   bindEvents();
+
+  // !!! move this to bottom of nav
   // render build date time if env is prod
   if (BUILD_STAMP) {
     renderBuildStamp(BUILD_STAMP);
