@@ -5,21 +5,17 @@ const CopyPlugin = require("copy-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-module.exports = envIsProd => {
-  let appUrl, devtool;
-  if (envIsProd) {
-    appUrl = new webpack.DefinePlugin({
-      APP_URL: JSON.stringify("https://subject026.github.io/dropbox-todo/"),
-      BUILD_STAMP: Date.now()
-    });
-    devtool = false;
-  } else {
-    appUrl = new webpack.DefinePlugin({
-      APP_URL: JSON.stringify("http://localhost:1111"),
-      BUILD_STAMP: false
-    });
-    devtool = "cheap-eval-source-map";
-  }
+module.exports = (env, argv) => {
+  const envVars = new webpack.DefinePlugin({
+    APP_URL: JSON.stringify(
+      argv.mode === "production" ? "https://subject026.github.io/dropbox-todos/" : "http://localhost:1111"
+    ),
+    BUILD_STAMP: argv.mode === "production" ? Date.now() : false
+  });
+  const devtool = argv.mode === "production" ? false : "cheap-eval-source-map";
+  console.log("envVars : ", envVars);
+  console.log("devtool? : ", devtool);
+
   return {
     entry: ["babel-polyfill", "./src/js/app.js"],
     output: {
@@ -32,11 +28,11 @@ module.exports = envIsProd => {
       contentBase: "./dist"
     },
     plugins: [
+      envVars,
       new HTMLPlugin({
         filename: "index.html",
         template: "./src/index.html"
       }),
-      appUrl,
       new WorkboxPlugin.InjectManifest({
         swSrc: "./src/src-sw.js",
         swDest: "sw.js"

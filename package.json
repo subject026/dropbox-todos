@@ -6,10 +6,10 @@
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build-dev": "webpack --mode development",
-    "build-prod": "webpack --mode production --env.production",
-    "serve-prod": "webpack --mode production --env.production && serve dist",
-    "gh-publish": "npm run build-prod && node publish.js",
-    "surge-publish": "surge dist --domain https://cute-sort.surge.sh/",
+    "build-prod": "webpack --mode production",
+    "serve-prod": "npm run build-prod && serve dist",
+    "deploy-gh": "npm run build-prod && node publish.js",
+    "deploy-surge": "npm run build-prod && surge dist --domain https://cute-sort.surge.sh/",
     "test": "jest --watch"
   },
   "keywords": [],
