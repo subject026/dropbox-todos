@@ -5,7 +5,8 @@ export default {
     navToggle: "[data-js=nav-toggle]",
     overlay: "[data-js=overlay]",
     nav: "[data-js=nav]",
-    navMenu: "[data-js=nav-menu]"
+    navMenu: "[data-js=nav-menu]",
+    footer: "[data-js=footer]"
   },
   cls: {
     iconNoteBinHovered: "icon-note-bin--hovered",
@@ -21,6 +22,5 @@ export default {
   listTitle: ".list__title",
   todos: ".list__todos",
   listItem: ".list__item",
-  listForm: ".list__form",
-  footer: ".footer"
+  listForm: ".list__form"
 };

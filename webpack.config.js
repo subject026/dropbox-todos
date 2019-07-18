@@ -7,9 +7,7 @@ const WorkboxPlugin = require("workbox-webpack-plugin");
 
 module.exports = (env, argv) => {
   const envVars = new webpack.DefinePlugin({
-    APP_URL: JSON.stringify(
-      argv.mode === "production" ? "https://subject026.github.io/dropbox-todos/" : "http://localhost:1111"
-    ),
+    APP_URL: JSON.stringify(argv.mode === "production" ? "https://cute-sort.surge.sh/" : "http://localhost:1111"),
     BUILD_STAMP: argv.mode === "production" ? Date.now() : false
   });
   const devtool = argv.mode === "production" ? false : "cheap-eval-source-map";
