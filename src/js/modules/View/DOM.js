@@ -3,12 +3,14 @@ export default {
     main: "[data-js=main]",
     noteBin: "[data-js=note-bin]",
     navToggle: "[data-js=nav-toggle]",
+    overlay: "[data-js=overlay]",
     nav: "[data-js=nav]",
     navMenu: "[data-js=nav-menu]"
   },
   cls: {
     iconNoteBinHovered: "icon-note-bin--hovered",
-    navIsVisible: "layout-nav--is-visible"
+    navIsVisible: "layout-nav--is-visible",
+    overlayIsHidden: "layout-overlay--is-hidden"
   },
   header: ".header",
   buttonAuthenticate: "#button-authenticate",

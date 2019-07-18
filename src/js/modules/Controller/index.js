@@ -2,9 +2,10 @@ import * as State from "../Model";
 import * as View from "../View";
 import { DOM, editNodeOn, editNodeOff } from "../View";
 
-function handleNavToggle(nav) {
+function handleNavToggle(nav, overlay) {
   return function() {
     nav.classList.toggle(DOM.cls.navIsVisible);
+    overlay.classList.toggle(DOM.cls.overlayIsHidden);
   };
 }
 
@@ -105,7 +106,8 @@ function handleDrop(event) {
 export function bindEvents() {
   const navToggle = document.querySelector(DOM.sel.navToggle);
   const nav = document.querySelector(DOM.sel.nav);
-  navToggle.addEventListener("click", handleNavToggle(nav));
+  const overlay = document.querySelector(DOM.sel.overlay);
+  navToggle.addEventListener("click", handleNavToggle(nav, overlay));
 
   const list = document.querySelector(DOM.list);
   const listForm = document.querySelector(DOM.listForm);

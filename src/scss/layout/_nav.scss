@@ -3,7 +3,7 @@
   position: fixed;
   top: 0;
   left: -$nav_width;
-  z-index: 6;
+  z-index: 7;
   width: $nav_width;
   padding-top: $header_height;
   background-color: $white;
@@ -12,4 +12,20 @@
 
 .layout-nav--is-visible {
   transform: translateX(100%);
+}
+
+.layout-overlay {
+  height: 100%;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity $nav_transition, visibility $nav_transition;
+}
+
+.layout-overlay--is-hidden {
+  opacity: 0;
+  visibility: hidden;
 }
