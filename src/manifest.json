@@ -1,8 +1,8 @@
 {
   "name": "Dropbox Todos",
   "short_name": "Dropbox Todos",
-  "theme_color": "#fff",
-  "background_color": "#fff",
+  "theme_color": "#eee",
+  "background_color": "#eee",
   "display": "standalone",
   "orientation": "portrait",
   "Scope": "/",
