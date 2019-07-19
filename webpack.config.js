@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const HTMLPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = (env, argv) => {
@@ -31,6 +32,11 @@ module.exports = (env, argv) => {
         filename: "index.html",
         template: "./src/index.html"
       }),
+      new MiniCSSExtractPlugin({
+        filename: "[name].css",
+        chunkFilename: "[id].css"
+        //ignoreOrder: false // Enable to remove warnings about conflicting order
+      }),
       new WorkboxPlugin.InjectManifest({
         swSrc: "./src/src-sw.js",
         swDest: "sw.js"
@@ -57,7 +63,16 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.scss$/,
-          use: ["style-loader", "css-loader", "sass-loader"]
+          use: [
+            {
+              loader: MiniCSSExtractPlugin.loader,
+              options: {
+                hmr: argv.mode !== "production"
+              }
+            },
+            "css-loader",
+            "sass-loader"
+          ]
         }
       ]
     }
