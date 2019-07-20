@@ -25,7 +25,8 @@ module.exports = (env, argv) => {
       new CleanPlugin(),
       new webpack.DefinePlugin({
         NODE_ENV: JSON.stringify(modeIsProd ? "production" : "development"),
-        APP_URL: JSON.stringify(modeIsProd ? "https://cute-sort.surge.sh/" : "http://localhost:1111")
+        APP_URL: JSON.stringify(modeIsProd ? "https://cute-sort.surge.sh/" : "http://localhost:1111"),
+        BUILD_TIME_STAMP: modeIsProd ? Date.now() : false
       }),
       new HTMLPlugin({
         filename: "index.html",

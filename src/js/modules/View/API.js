@@ -20,7 +20,7 @@ export function renderNav(token) {
 // !!! move build stamp to bottom of nav
 export function renderBuildStamp() {
   const footer = document.querySelector(DOM.sel.footer);
-  footer.innerHTML = `<div>Built ${new Date().toLocaleString()}</div>`;
+  footer.innerHTML = `<div>Built ${new Date(BUILD_TIME_STAMP).toLocaleString()}</div>`;
 }
 
 // list
