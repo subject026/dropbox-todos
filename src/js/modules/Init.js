@@ -32,7 +32,7 @@ export default function init() {
 
   // !!! move this to bottom of nav
   // render build date time if env is prod
-  if (BUILD_STAMP) {
-    renderBuildStamp(BUILD_STAMP);
+  if (NODE_ENV === "production") {
+    renderBuildStamp();
   }
 }

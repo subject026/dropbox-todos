@@ -18,25 +18,14 @@ export function renderNav(token) {
 }
 
 // !!! move build stamp to bottom of nav
-export function renderBuildStamp(stamp) {
+export function renderBuildStamp() {
   const footer = document.querySelector(DOM.sel.footer);
-  footer.innerHTML = `<div>Built ${new Date(stamp).toLocaleString()}</div>`;
+  footer.innerHTML = `<div>Built ${new Date().toLocaleString()}</div>`;
 }
 
 // list
 const mainEl = document.querySelector(DOM.sel.main);
 let listEl; // value set once list rendered
-
-// export const loading = {
-//   html: `<span class="loading-todos">Loading todos...</span>`,
-//   render() {
-//     document.querySelector(DOM.main).innerHTML = this.html;
-//   },
-//   remove() {
-//     const loadingEl = document.querySelector(DOM.loadingTodos);
-//     document.querySelector(DOM.loadingTodos).parentNode.removeChild(loadingEl);
-//   }
-// };
 
 /**
  *  List
