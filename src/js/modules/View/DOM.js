@@ -6,12 +6,14 @@ export default {
     overlay: "[data-js=overlay]",
     nav: "[data-js=nav]",
     navMenu: "[data-js=nav-menu]",
-    footer: "[data-js=footer]"
+    footer: "[data-js=footer]",
+    loadingOverlay: "[data-js=loading-overlay]"
   },
   cls: {
     iconNoteBinHovered: "icon-note-bin--hovered",
     navIsVisible: "layout-nav--is-visible",
-    overlayIsHidden: "layout-overlay--is-hidden"
+    overlayIsHidden: "layout-overlay--is-hidden",
+    loadingOverlayIsHidden: "loading-overlay--is-hidden"
   },
   header: ".header",
   buttonAuthenticate: "#button-authenticate",

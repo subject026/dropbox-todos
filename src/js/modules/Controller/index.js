@@ -3,12 +3,18 @@ import { DOM } from "../View";
 import { handleAddTodoSubmit } from "./ListForm";
 import { handleListDoubleClick, handleBlur, handleTextInput, handleCheckboxToggle } from "./Edit";
 import { handleDragStart, handleDragEnter, handleDragOver, handleDragLeave, handleDragDrop } from "./DragAndDrop";
+import { handleWindowFocus } from "./WindowFocus";
 
 function handleNavToggle(nav, overlay) {
   return function() {
     nav.classList.toggle(DOM.cls.navIsVisible);
     overlay.classList.toggle(DOM.cls.overlayIsHidden);
   };
+}
+
+export function toggleLoadingOverlay() {
+  const loadingOverlay = document.querySelector(DOM.sel.loadingOverlay);
+  loadingOverlay.classList.toggle(DOM.cls.loadingOverlayIsHidden);
 }
 
 export function bindEvents() {
@@ -33,4 +39,7 @@ export function bindEvents() {
   noteBin.addEventListener("dragleave", handleDragLeave);
   noteBin.addEventListener("dragover", handleDragOver);
   noteBin.addEventListener("drop", handleDragDrop);
+
+  // window focus
+  window.addEventListener("focus", handleWindowFocus);
 }

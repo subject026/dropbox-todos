@@ -1,6 +1,6 @@
 import { renderList, renderNav, renderBuildStamp } from "./View";
-import { bindEvents } from "./Controller";
-import { getState, getTokenLocal, setTokenLocal, getFilesListDB, getDataDB } from "./Model";
+import { bindEvents, toggleLoadingOverlay } from "./Controller";
+import { getState, getTokenLocal, setTokenLocal, getFilesListDB, getDataDB, saveDataDB } from "./Model";
 import { loadState } from "./Model/State/index";
 
 export default async function init() {
@@ -56,6 +56,7 @@ export default async function init() {
         // offer choice between keeping and using local/DB data
       } else {
         // use DB data
+        toggleLoadingOverlay();
         const newestFile = filesList.reduce(
           (acc, item) => {
             const timestamp = parseInt(item.name.split("_")[0]);
@@ -67,13 +68,16 @@ export default async function init() {
           },
           { timestamp: 0, path_lower: "" }
         );
+
         const data = await getDataDB(newestFile.path_lower);
         // load into app state and re-render list
         loadState(data);
         renderList(getState());
+        toggleLoadingOverlay();
       }
     } else {
-      // save local data to DB
+      // no existing DB data, save local data if it's been changed since init
+      if (getState().timestamp > 0) saveDataDB(getState());
     }
     //   // there is a list of files - get the path_lower val of most recent one
   }

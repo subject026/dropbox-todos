@@ -65,7 +65,7 @@ async function postData(data) {
   let res;
   try {
     res = await dbx.filesUpload({
-      path: `/${Date.now()}_todos.json`,
+      path: `/${data.timestamp}_todos.json`,
       contents: blob
     });
   } catch (err) {
