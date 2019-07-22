@@ -49,7 +49,7 @@ export function update(action, data, state) {
 }
 
 export const initialState = {
-  timestamp: null,
+  timestamp: 0,
   title: "New List",
   todos: []
 };
@@ -57,6 +57,10 @@ export const initialState = {
 /**
  * API
  */
+
+export function loadState(data) {
+  setAppData(update("HYDRATE", data, getAppData()), false);
+}
 
 export function addTodo(title) {
   const newTodo = {
@@ -87,7 +91,6 @@ export function removeTodo(id) {
 export function getState() {
   // initialise if there's no app data
   if (!getAppData()) {
-    initialState.timestamp = Date.now();
     setAppData(initialState);
   }
   return getAppData();

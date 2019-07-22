@@ -1,3 +1,5 @@
+import { saveDataDB } from "../Dropbox";
+
 export function getTokenLocal() {
   return localStorage.getItem("dropboxToken");
 }
@@ -16,7 +18,10 @@ export function getAppData() {
   return data;
 }
 
-export function setAppData(data) {
+export function setAppData(data, saveToDb = true) {
+  if (getTokenLocal() && saveToDb) {
+    saveDataDB(data);
+  }
   try {
     localStorage.setItem("appData", JSON.stringify(data));
   } catch (err) {

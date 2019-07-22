@@ -13,7 +13,7 @@ export function getAuthenticationLink() {
 /**
  * Returns array of remote app folder file details
  */
-export async function getFilesList() {
+export async function getFilesListDB() {
   const dbx = DBX.getInstance();
   let res;
   try {
@@ -27,7 +27,7 @@ export async function getFilesList() {
 /**
  * Returns parsed JSON file from remote DB app folder
  */
-export async function getData(path) {
+export async function getDataDB(path) {
   const dbx = DBX.getInstance();
   let data;
   try {
@@ -50,7 +50,7 @@ export async function getData(path) {
 /**
  * Save todos data as JSON file to DB app folder
  */
-export async function saveData(data) {
+export async function saveDataDB(data) {
   clearTimeout(saveTimeout);
   saveTimeout = setTimeout(function() {
     postData(data);
