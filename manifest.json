@@ -6,7 +6,6 @@
   "display": "standalone",
   "orientation": "portrait",
   "Scope": "/",
-  "// start_url": "/",
   "start_url": "https://subject026.github.io/dropbox-todos/",
   "icons": [
     {
