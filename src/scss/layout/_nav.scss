@@ -29,3 +29,7 @@
   opacity: 0;
   visibility: hidden;
 }
+
+.body--no-scroll {
+  overflow-y: hidden;
+}

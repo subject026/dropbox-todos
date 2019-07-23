@@ -1,27 +1,16 @@
-import { DOM } from "../View";
+import { DOM, handleNavToggle } from "../View";
 
 import { handleAddTodoSubmit } from "./ListForm";
 import { handleListDoubleClick, handleBlur, handleTextInput, handleCheckboxToggle } from "./Edit";
 import { handleDragStart, handleDragEnter, handleDragOver, handleDragLeave, handleDragDrop } from "./DragAndDrop";
-import { handleWindowFocus } from "./WindowFocus";
-
-function handleNavToggle(nav, overlay) {
-  return function() {
-    nav.classList.toggle(DOM.cls.navIsVisible);
-    overlay.classList.toggle(DOM.cls.overlayIsHidden);
-  };
-}
-
-export function toggleLoadingOverlay() {
-  const loadingOverlay = document.querySelector(DOM.sel.loadingOverlay);
-  loadingOverlay.classList.toggle(DOM.cls.loadingOverlayIsHidden);
-}
+import { handleWindowFocus, handleWindowBlur } from "./Window";
 
 export function bindEvents() {
   const navToggle = document.querySelector(DOM.sel.navToggle);
+  const body = document.querySelector(DOM.sel.body);
   const nav = document.querySelector(DOM.sel.nav);
   const overlay = document.querySelector(DOM.sel.overlay);
-  navToggle.addEventListener("click", handleNavToggle(nav, overlay));
+  navToggle.addEventListener("click", handleNavToggle(body, nav, overlay));
 
   const list = document.querySelector(DOM.list);
   const listForm = document.querySelector(DOM.listForm);
@@ -40,6 +29,7 @@ export function bindEvents() {
   noteBin.addEventListener("dragover", handleDragOver);
   noteBin.addEventListener("drop", handleDragDrop);
 
-  // window focus
+  // window focus / blur
   window.addEventListener("focus", handleWindowFocus);
+  window.addEventListener("blur", handleWindowBlur);
 }

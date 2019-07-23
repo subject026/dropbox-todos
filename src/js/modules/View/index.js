@@ -19,6 +19,19 @@ export function renderNav(token) {
   }
 }
 
+export function handleNavToggle(body, nav, overlay) {
+  return function() {
+    body.classList.toggle(DOM.cls.bodyNoScroll);
+    nav.classList.toggle(DOM.cls.navIsVisible);
+    overlay.classList.toggle(DOM.cls.overlayIsHidden);
+  };
+}
+
+export function toggleLoadingOverlay() {
+  const loadingOverlay = document.querySelector(DOM.sel.loadingOverlay);
+  loadingOverlay.classList.toggle(DOM.cls.loadingOverlayIsHidden);
+}
+
 // !!! move build stamp to bottom of nav
 export function renderBuildStamp() {
   const footer = document.querySelector(DOM.sel.footer);
