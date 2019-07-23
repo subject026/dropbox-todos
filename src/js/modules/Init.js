@@ -5,7 +5,6 @@ import { loadState } from "./Model/State/index";
 import { startPingInterval } from "./Controller/Window";
 
 export default async function init() {
-  console.log("init()...");
   // register SW
   if ("serviceWorker" in navigator) {
     // register our service worker
