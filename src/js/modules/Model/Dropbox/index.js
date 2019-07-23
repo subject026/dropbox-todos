@@ -1,6 +1,7 @@
 import { Dropbox } from "dropbox";
 
 import DBX from "./DBX";
+import { getState } from "../State";
 
 let saveTimeout;
 
@@ -21,6 +22,26 @@ export async function getFilesListDB() {
     return res.entries;
   } catch (err) {
     console.error(err);
+  }
+}
+
+export async function hasNewerDataDB() {
+  const filesList = await getFilesListDB();
+  const newestFile = filesList.reduce(
+    (acc, item) => {
+      const timestamp = parseInt(item.name.split("_")[0]);
+      if (timestamp > acc.timestamp) {
+        acc.timestamp = timestamp.toString();
+        acc.path_lower = item.path_lower;
+      }
+      return acc;
+    },
+    { timestamp: 0, path_lower: "" }
+  );
+  if (newestFile.timestamp > getState().timestamp) {
+    return newestFile.path_lower;
+  } else {
+    return false;
   }
 }
 

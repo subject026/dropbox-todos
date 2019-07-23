@@ -1,9 +1,11 @@
-import { renderList, renderNav, renderBuildStamp } from "./View";
-import { bindEvents, toggleLoadingOverlay } from "./Controller";
+import { renderList, renderNav, renderBuildStamp, toggleLoadingOverlay } from "./View";
+import { bindEvents } from "./Controller";
 import { getState, getTokenLocal, setTokenLocal, getFilesListDB, getDataDB, saveDataDB } from "./Model";
 import { loadState } from "./Model/State/index";
+import { startPingInterval } from "./Controller/Window";
 
 export default async function init() {
+  console.log("init()...");
   // register SW
   if ("serviceWorker" in navigator) {
     // register our service worker
@@ -22,7 +24,7 @@ export default async function init() {
   if (urlToken) {
     const token = urlToken.split("access_token=")[1].split("&")[0];
     setTokenLocal(token);
-    history.pushState("", document.title, "/");
+    history.pushState("", document.title, APP_URL);
   }
 
   renderList(getState());
@@ -34,28 +36,14 @@ export default async function init() {
 
   // check DB for data
   if (dbToken) {
-    /*
-      - no data in DB yet                 -> save local data and carry on with automatic backups
-    
-      - there is already app data in DB 
-
-        - has local data been changed from initial state?
-
-          - data still initial state      -> pull in DB data and populate local state/render list
-
-          - local data has changed from initial state:
-
-            - use local & lose DB data?
-            - use DB data & lose local?
-
-    */
     const filesList = await getFilesListDB();
     if (filesList.length) {
       // has local data changed?
       if (getState().timestamp > 0) {
-        // offer choice between keeping and using local/DB data
+        // there is some local data - keeping for now
+        // !!! give choice to keep/discard local data
       } else {
-        // use DB data
+        // no local data - pull data from DB
         toggleLoadingOverlay();
         const newestFile = filesList.reduce(
           (acc, item) => {
@@ -70,7 +58,6 @@ export default async function init() {
         );
 
         const data = await getDataDB(newestFile.path_lower);
-        // load into app state and re-render list
         loadState(data);
         renderList(getState());
         toggleLoadingOverlay();
@@ -79,7 +66,8 @@ export default async function init() {
       // no existing DB data, save local data if it's been changed since init
       if (getState().timestamp > 0) saveDataDB(getState());
     }
-    //   // there is a list of files - get the path_lower val of most recent one
+    // start pinging API for new data
+    startPingInterval();
   }
 
   if (NODE_ENV === "production") {
