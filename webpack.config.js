@@ -25,7 +25,7 @@ module.exports = (env, argv) => {
       new CleanPlugin(),
       new webpack.DefinePlugin({
         NODE_ENV: JSON.stringify(modeIsProd ? "production" : "development"),
-        APP_URL: JSON.stringify(modeIsProd ? "https://cute-sort.surge.sh/" : "http://localhost:1111"),
+        APP_URL: JSON.stringify(modeIsProd ? "https://subject026.github.io/dropbox-todos/" : "http://localhost:1111"),
         BUILD_TIME_STAMP: modeIsProd ? Date.now() : false
       }),
       new HTMLPlugin({
@@ -42,7 +42,7 @@ module.exports = (env, argv) => {
       }),
       new CopyPlugin([
         {
-          from: "./src/manifest.json",
+          from: modeIsProd ? "./src/manifest.json" : "./src/manifest-dev.json",
           to: "manifest.json"
         },
         {
